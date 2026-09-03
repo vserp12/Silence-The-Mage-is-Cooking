@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: dbe3fc5fa79ef8fd1a9cd6da8c737eab
+guid: 3657b813fae80c948b9d265c81094f07
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4033355307889638888
-    second: pixil-frame-0 (6)_0
+      213: -8592073745961243590
+    second: enemy_atacks_0
+  - first:
+      213: -1908221141882709749
+    second: enemy_atacks_1
+  - first:
+      213: -4541283768197630715
+    second: enemy_atacks_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +102,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixil-frame-0 (6)_0
+      name: enemy_atacks_0
       rect:
         serializedVersion: 2
-        x: 57
-        y: 101
-        width: 1090
-        height: 659
+        x: 15
+        y: 1551
+        width: 34
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8edb2bb684b59f730800000000000000
-      internalID: 4033355307889638888
+      spriteID: a3c25086372d2c880800000000000000
+      internalID: -8592073745961243590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_atacks_1
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 1279
+        width: 290
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b09d03d4bf2a485e0800000000000000
+      internalID: -1908221141882709749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_atacks_2
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 1551
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 505355c397e1af0c0800000000000000
+      internalID: -4541283768197630715
       vertices: []
       indices: 
       edges: []
@@ -148,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixil-frame-0 (6)_0: 4033355307889638888
+      enemy_atacks_0: -8592073745961243590
+      enemy_atacks_1: -1908221141882709749
+      enemy_atacks_2: -4541283768197630715
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

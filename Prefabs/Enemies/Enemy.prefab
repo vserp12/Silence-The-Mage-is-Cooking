@@ -360,7 +360,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3632367540477974650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c59cad599a5832d4a8685c83f4e5a347, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bf21bc14df439708807e795a7326947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 30

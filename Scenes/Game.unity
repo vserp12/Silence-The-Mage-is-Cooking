@@ -176,7 +176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 123281562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 921e45d367dee3e45ac25f219eff17ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ee00438d79a295d5a2e1ee336e17cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverUI
   deathPanel: {fileID: 1726719984}
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 199216991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9465713c0b086d4eb146aa5953fd9db, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ad7d55e1f8a4b6a3b1db5708b3b4f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 636357503}
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 636357498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0c8541582a21f944904d04b38e5afde, type: 3}
+  m_Script: {fileID: 11500000, guid: bf3a24885227c3e00a1471490ffc0d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
@@ -804,7 +804,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 636357498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8854570b38188284c8de2ab63da7b786, type: 3}
+  m_Script: {fileID: 11500000, guid: 535d28a476457c23c83ed16fdec54b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpellCaster
   currentSpell: {fileID: 11400000, guid: 78fd6daade5a33748aac5d5eef03b2ef, type: 2}
@@ -817,7 +817,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 636357498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02c2f2715774993439139656e0d30f88, type: 3}
+  m_Script: {fileID: 11500000, guid: ce65fc1eee84fbc718b89e6d55fe1a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 50
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1383907486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4555c02f68c38469ad0373e874d995, type: 3}
+  m_Script: {fileID: 11500000, guid: 0456a471874bab4159b27bdc82822617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMusic
   music: {fileID: 8300000, guid: 9cccaa8b28a37b4408b8dbf8a401a5ba, type: 3}

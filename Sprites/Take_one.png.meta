@@ -1,40 +1,31 @@
 fileFormatVersion: 2
-guid: a50d2532ddb44388183ae8702f6eaa04
+guid: 803deba160396475f8d283480c918905
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5513050994037168576
-    second: pixil-frame-0 (3)_0
+      213: -1399043022508758291
+    second: Take_one_0
   - first:
-      213: 2913723192658514240
-    second: pixil-frame-0 (3)_1
+      213: 8177245195994727940
+    second: Take_one_1
   - first:
-      213: -8979937471251252185
-    second: pixil-frame-0 (3)_2
+      213: -1855014888913186342
+    second: Take_one_2
   - first:
-      213: -2430226014596342719
-    second: pixil-frame-0 (3)_3
+      213: 7483118915541357772
+    second: Take_one_3
   - first:
-      213: -7867442664560525644
-    second: pixil-frame-0 (3)_4
+      213: 6627016384213883405
+    second: Take_one_4
   - first:
-      213: -2802658036453756822
-    second: pixil-frame-0 (3)_5
+      213: -7098949488360026831
+    second: Take_one_5
   - first:
-      213: -8683995108145156770
-    second: pixil-frame-0 (3)_6
+      213: -7397136041013412220
+    second: Take_one_6
   - first:
-      213: 255159921361895047
-    second: pixil-frame-0 (3)_7
-  - first:
-      213: 8611549923809062217
-    second: pixil-frame-0 (3)_8
-  - first:
-      213: -6522757070750181056
-    second: pixil-frame-0 (3)_9
-  - first:
-      213: -1291130821392005998
-    second: pixil-frame-0 (3)_10
+      213: -2503286530961952677
+    second: Take_one_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,30 +117,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixil-frame-0 (3)_0
+      name: Take_one_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1295
-        width: 145
-        height: 305
+        x: 127
+        y: 991
+        width: 194
+        height: 178
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +136,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 046eccf8455bd73b0800000000000000
-      internalID: -5513050994037168576
+      spriteID: dea60e198c9959ce0800000000000000
+      internalID: -1399043022508758291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-0 (3)_1
+      name: Take_one_1
       rect:
         serializedVersion: 2
-        x: 159
-        y: 1295
+        x: 351
+        y: 1007
         width: 146
-        height: 305
+        height: 178
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0415a306ecf9f6820800000000000000
-      internalID: 2913723192658514240
+      spriteID: 406098c4e296b7170800000000000000
+      internalID: 8177245195994727940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-0 (3)_2
+      name: Take_one_2
       rect:
         serializedVersion: 2
-        x: 15
-        y: 927
-        width: 162
-        height: 306
+        x: 527
+        y: 1007
+        width: 114
+        height: 162
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +180,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 72c79d8927ad06380800000000000000
-      internalID: -8979937471251252185
+      spriteID: ad1d44d69c9a146e0800000000000000
+      internalID: -1855014888913186342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-0 (3)_3
+      name: Take_one_3
       rect:
         serializedVersion: 2
-        x: 239
-        y: 927
-        width: 194
-        height: 290
+        x: 655
+        y: 991
+        width: 130
+        height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 14c521cc05a164ed0800000000000000
-      internalID: -2430226014596342719
+      spriteID: cc459d4a10169d760800000000000000
+      internalID: 7483118915541357772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-0 (3)_4
+      name: Take_one_4
       rect:
         serializedVersion: 2
-        x: 447
-        y: 927
-        width: 226
-        height: 290
+        x: 879
+        y: 1007
+        width: 146
+        height: 130
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4befd10849a31d290800000000000000
-      internalID: -7867442664560525644
+      spriteID: d0a13cd3a44e7fb50800000000000000
+      internalID: 6627016384213883405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-0 (3)_5
+      name: Take_one_5
       rect:
         serializedVersion: 2
-        x: 719
-        y: 943
-        width: 242
-        height: 258
+        x: 1055
+        y: 1007
+        width: 130
+        height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,20 +246,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a60b74e6d55fa19d0800000000000000
-      internalID: -2802658036453756822
+      spriteID: 13d0cdb5d077b7d90800000000000000
+      internalID: -7098949488360026831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-0 (3)_6
+      name: Take_one_6
       rect:
         serializedVersion: 2
-        x: 1151
-        y: 959
-        width: 18
-        height: 18
+        x: 1215
+        y: 1007
+        width: 130
+        height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,20 +268,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e5d27cb75704c7780800000000000000
-      internalID: -8683995108145156770
+      spriteID: 48ef72066f7185990800000000000000
+      internalID: -7397136041013412220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-0 (3)_7
+      name: Take_one_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 543
-        width: 161
-        height: 306
+        x: 31
+        y: 607
+        width: 1538
+        height: 354
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -312,74 +290,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 78e31b9b8928a8300800000000000000
-      internalID: 255159921361895047
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pixil-frame-0 (3)_8
-      rect:
-        serializedVersion: 2
-        x: 191
-        y: 543
-        width: 194
-        height: 290
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 94d6e2e970f528770800000000000000
-      internalID: 8611549923809062217
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pixil-frame-0 (3)_9
-      rect:
-        serializedVersion: 2
-        x: 463
-        y: 543
-        width: 226
-        height: 290
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 04994c1d0038a75a0800000000000000
-      internalID: -6522757070750181056
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pixil-frame-0 (3)_10
-      rect:
-        serializedVersion: 2
-        x: 767
-        y: 559
-        width: 242
-        height: 258
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2940f50db5bf41ee0800000000000000
-      internalID: -1291130821392005998
+      spriteID: b503efeb92a824dd0800000000000000
+      internalID: -2503286530961952677
       vertices: []
       indices: 
       edges: []
@@ -398,17 +310,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixil-frame-0 (3)_0: -5513050994037168576
-      pixil-frame-0 (3)_1: 2913723192658514240
-      pixil-frame-0 (3)_10: -1291130821392005998
-      pixil-frame-0 (3)_2: -8979937471251252185
-      pixil-frame-0 (3)_3: -2430226014596342719
-      pixil-frame-0 (3)_4: -7867442664560525644
-      pixil-frame-0 (3)_5: -2802658036453756822
-      pixil-frame-0 (3)_6: -8683995108145156770
-      pixil-frame-0 (3)_7: 255159921361895047
-      pixil-frame-0 (3)_8: 8611549923809062217
-      pixil-frame-0 (3)_9: -6522757070750181056
+      Take_one_0: -1399043022508758291
+      Take_one_1: 8177245195994727940
+      Take_one_2: -1855014888913186342
+      Take_one_3: 7483118915541357772
+      Take_one_4: 6627016384213883405
+      Take_one_5: -7098949488360026831
+      Take_one_6: -7397136041013412220
+      Take_one_7: -2503286530961952677
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
