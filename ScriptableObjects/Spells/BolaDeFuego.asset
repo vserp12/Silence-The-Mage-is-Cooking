@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21870576c453f204794e05dd40c36b3c, type: 3}
+  m_Name: BolaDeFuego
+  m_EditorClassIdentifier: Assembly-CSharp::SpellData
+  spellName: Nombre del Hechizo
+  castTime: 1.5
+  damage: 30
+  projectileSpeed: 10
+  spellColor: {r: 0.9924528, g: 0.41768003, b: 0, a: 1}
+  projectilePrefab: {fileID: 7514419340198702025, guid: 405e3e8c39c8081478bdd250279c4572, type: 3}
