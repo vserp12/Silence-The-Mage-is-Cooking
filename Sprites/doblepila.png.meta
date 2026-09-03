@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 53c17940a19087ab7b85465514bc8510
+guid: fd66741027846cd69b9e37413fa10ed6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3337038689812066966
-    second: pixil-frame-0_0
+      213: 8087534067903091833
+    second: doblepila_0
+  - first:
+      213: 2525058908711232387
+    second: doblepila_1
+  - first:
+      213: -6896733965740914223
+    second: doblepila_2
+  - first:
+      213: 3203257168385139077
+    second: doblepila_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixil-frame-0_0
+      name: doblepila_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 1263
-        width: 178
-        height: 322
+        x: 0
+        y: 1519
+        width: 561
+        height: 462
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a6d4404fdf470b1d0800000000000000
-      internalID: -3337038689812066966
+      spriteID: 974db3a9261bc3070800000000000000
+      internalID: 8087534067903091833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doblepila_1
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1519
+        width: 542
+        height: 462
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3832baaf2bfca0320800000000000000
+      internalID: 2525058908711232387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doblepila_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1159
+        width: 581
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d944a5aff0e940a0800000000000000
+      internalID: -6896733965740914223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doblepila_3
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1159
+        width: 562
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 581e1dd4c61447c20800000000000000
+      internalID: 3203257168385139077
       vertices: []
       indices: 
       edges: []
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixil-frame-0_0: -3337038689812066966
+      doblepila_0: 8087534067903091833
+      doblepila_1: 2525058908711232387
+      doblepila_2: -6896733965740914223
+      doblepila_3: 3203257168385139077
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

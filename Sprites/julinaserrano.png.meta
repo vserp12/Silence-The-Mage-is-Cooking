@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 890cc73146e2ba326ba1d8f88e57093b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5296511807008912681
+    second: julinaserrano_0
+  - first:
+      213: -979790179308962628
+    second: julinaserrano_1
+  - first:
+      213: 9215298939158715794
+    second: julinaserrano_2
+  - first:
+      213: 7585955385311835775
+    second: julinaserrano_3
+  - first:
+      213: -8726150180546109304
+    second: julinaserrano_4
+  - first:
+      213: -2019088924895898134
+    second: julinaserrano_5
+  - first:
+      213: -2625706729499212451
+    second: julinaserrano_6
+  - first:
+      213: -2930786284242284834
+    second: julinaserrano_7
+  - first:
+      213: 3998997476776982620
+    second: julinaserrano_8
+  - first:
+      213: 8128421642399349168
+    second: julinaserrano_9
+  - first:
+      213: -8481960785426599670
+    second: julinaserrano_10
+  - first:
+      213: 2859881336440880984
+    second: julinaserrano_11
+  - first:
+      213: -4207116142077203516
+    second: julinaserrano_12
+  - first:
+      213: 3627850639690891344
+    second: julinaserrano_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: julinaserrano_0
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 879
+        width: 146
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7da429ad2920f76b0800000000000000
+      internalID: -5296511807008912681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_1
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 879
+        width: 130
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbc7fd7e5061762f0800000000000000
+      internalID: -979790179308962628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_2
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 879
+        width: 130
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29dd6977f8153ef70800000000000000
+      internalID: 9215298939158715794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_3
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 879
+        width: 114
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7639771b3ab64960800000000000000
+      internalID: 7585955385311835775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_4
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 879
+        width: 130
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 880a6d7d4ac76e680800000000000000
+      internalID: -8726150180546109304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_5
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 879
+        width: 130
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae597a50251caf3e0800000000000000
+      internalID: -2019088924895898134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_6
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 879
+        width: 146
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d55c8df14ad9f8bd0800000000000000
+      internalID: -2625706729499212451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_7
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 47
+        width: 146
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edec6270761c357d0800000000000000
+      internalID: -2930786284242284834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_8
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 47
+        width: 130
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c58b9fc740b4f7730800000000000000
+      internalID: 3998997476776982620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_9
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 47
+        width: 130
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b97fc3ea64fdc070800000000000000
+      internalID: 8128421642399349168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_10
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 47
+        width: 114
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a01bad1ea950a4a80800000000000000
+      internalID: -8481960785426599670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_11
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 47
+        width: 130
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85ff3565ce650b720800000000000000
+      internalID: 2859881336440880984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_12
+      rect:
+        serializedVersion: 2
+        x: 895
+        y: 63
+        width: 130
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cb2da6b8225d95c0800000000000000
+      internalID: -4207116142077203516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: julinaserrano_13
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 63
+        width: 146
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05003f48fe6b85230800000000000000
+      internalID: 3627850639690891344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      julinaserrano_0: -5296511807008912681
+      julinaserrano_1: -979790179308962628
+      julinaserrano_10: -8481960785426599670
+      julinaserrano_11: 2859881336440880984
+      julinaserrano_12: -4207116142077203516
+      julinaserrano_13: 3627850639690891344
+      julinaserrano_2: 9215298939158715794
+      julinaserrano_3: 7585955385311835775
+      julinaserrano_4: -8726150180546109304
+      julinaserrano_5: -2019088924895898134
+      julinaserrano_6: -2625706729499212451
+      julinaserrano_7: -2930786284242284834
+      julinaserrano_8: 3998997476776982620
+      julinaserrano_9: 8128421642399349168
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,16 +1,25 @@
 fileFormatVersion: 2
-guid: be9029dba97f8d7c6b8a800b57f7dc77
+guid: e08fba7515fa1780785b0c38e401a9ee
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7383654581080768481
-    second: pixil-frame-1_0
+      213: -2873436741413845175
+    second: mediapila_0
   - first:
-      213: -8661827778729561222
-    second: pixil-frame-1_1
+      213: -8768247595194927466
+    second: mediapila_1
   - first:
-      213: 5269943291710892004
-    second: pixil-frame-1_2
+      213: 5628982306710594679
+    second: mediapila_2
+  - first:
+      213: -3402053462763784172
+    second: mediapila_3
+  - first:
+      213: 1806125376548948913
+    second: mediapila_4
+  - first:
+      213: 3430800121727783183
+    second: mediapila_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixil-frame-1_0
+      name: mediapila_0
       rect:
         serializedVersion: 2
         x: 15
-        y: 735
-        width: 354
-        height: 865
+        y: 1375
+        width: 98
+        height: 210
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f10ce7e574df78990800000000000000
-      internalID: -7383654581080768481
+      spriteID: 947c87ff1808f18d0800000000000000
+      internalID: -2873436741413845175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-1_1
+      name: mediapila_1
       rect:
         serializedVersion: 2
-        x: 415
-        y: 735
-        width: 354
-        height: 865
+        x: 159
+        y: 1375
+        width: 98
+        height: 210
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a73b63f07810bc780800000000000000
-      internalID: -8661827778729561222
+      spriteID: 696bbb1b44de05680800000000000000
+      internalID: -8768247595194927466
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-1_2
+      name: mediapila_2
       rect:
         serializedVersion: 2
-        x: 831
-        y: 735
-        width: 354
-        height: 865
+        x: 15
+        y: 1151
+        width: 82
+        height: 162
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,8 +174,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e761e0a089922940800000000000000
-      internalID: 5269943291710892004
+      spriteID: 774a17695992e1e40800000000000000
+      internalID: 5628982306710594679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mediapila_3
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 1151
+        width: 82
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 418b315866a79c0d0800000000000000
+      internalID: -3402053462763784172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mediapila_4
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 975
+        width: 82
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bbc401f575a01910800000000000000
+      internalID: 1806125376548948913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mediapila_5
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 975
+        width: 82
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0193f69886ac9f20800000000000000
+      internalID: 3430800121727783183
       vertices: []
       indices: 
       edges: []
@@ -185,9 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixil-frame-1_0: -7383654581080768481
-      pixil-frame-1_1: -8661827778729561222
-      pixil-frame-1_2: 5269943291710892004
+      mediapila_0: -2873436741413845175
+      mediapila_1: -8768247595194927466
+      mediapila_2: 5628982306710594679
+      mediapila_3: -3402053462763784172
+      mediapila_4: 1806125376548948913
+      mediapila_5: 3430800121727783183
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

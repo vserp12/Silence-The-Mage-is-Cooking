@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: 583688251b8a724f8b34b87b92c695b0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5943353147624679471
+    second: chacarera_0
+  - first:
+      213: 7892639676815610836
+    second: chacarera_1
+  - first:
+      213: 8282867554619679167
+    second: chacarera_2
+  - first:
+      213: -2460176605255303403
+    second: chacarera_3
+  - first:
+      213: -7550169110309348745
+    second: chacarera_4
+  - first:
+      213: 3427827027245963652
+    second: chacarera_5
+  - first:
+      213: 5896077467052662464
+    second: chacarera_6
+  - first:
+      213: 512372224598198494
+    second: chacarera_7
+  - first:
+      213: 3448512606841541448
+    second: chacarera_8
+  - first:
+      213: 490105985267834753
+    second: chacarera_9
+  - first:
+      213: 8501461900717298014
+    second: chacarera_10
+  - first:
+      213: -3099398533824903122
+    second: chacarera_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: chacarera_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1263
+        width: 370
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d7912d2dc7f48da0800000000000000
+      internalID: -5943353147624679471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_1
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 1263
+        width: 370
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d39fb418f9488d60800000000000000
+      internalID: 7892639676815610836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_2
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 383
+        width: 98
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb1e6ba0828a2f270800000000000000
+      internalID: 8282867554619679167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_3
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 383
+        width: 114
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51ff70f7962bbddd0800000000000000
+      internalID: -2460176605255303403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_4
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 383
+        width: 114
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77a52e95239683790800000000000000
+      internalID: -7550169110309348745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_5
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 383
+        width: 146
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4899a761586129f20800000000000000
+      internalID: 3427827027245963652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_6
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 383
+        width: 210
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cedbdfa73313d150800000000000000
+      internalID: 5896077467052662464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_7
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 15
+        width: 98
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed8c3f7d2df4c1700800000000000000
+      internalID: 512372224598198494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_8
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 15
+        width: 114
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8431f36e1f39bdf20800000000000000
+      internalID: 3448512606841541448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_9
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 15
+        width: 114
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18f9e220cc43dc600800000000000000
+      internalID: 490105985267834753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_10
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 15
+        width: 146
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5195c75e824bf570800000000000000
+      internalID: 8501461900717298014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chacarera_11
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 15
+        width: 210
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e28000e6479bcf4d0800000000000000
+      internalID: -3099398533824903122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      chacarera_0: -5943353147624679471
+      chacarera_1: 7892639676815610836
+      chacarera_10: 8501461900717298014
+      chacarera_11: -3099398533824903122
+      chacarera_2: 8282867554619679167
+      chacarera_3: -2460176605255303403
+      chacarera_4: -7550169110309348745
+      chacarera_5: 3427827027245963652
+      chacarera_6: 5896077467052662464
+      chacarera_7: 512372224598198494
+      chacarera_8: 3448512606841541448
+      chacarera_9: 490105985267834753
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

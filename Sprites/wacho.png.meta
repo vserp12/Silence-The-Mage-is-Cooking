@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 53c17940a19087ab7b85465514bc8510
+guid: e45ad5daa881af1b889017251b123688
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3337038689812066966
-    second: pixil-frame-0_0
+      213: -773651317276411532
+    second: wacho_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixil-frame-0_0
+      name: wacho_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 1263
-        width: 178
-        height: 322
+        x: 189
+        y: 169
+        width: 1152
+        height: 1142
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a6d4404fdf470b1d0800000000000000
-      internalID: -3337038689812066966
+      spriteID: 479f9b5d9307345f0800000000000000
+      internalID: -773651317276411532
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixil-frame-0_0: -3337038689812066966
+      wacho_0: -773651317276411532
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
