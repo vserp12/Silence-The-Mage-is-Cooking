@@ -13,6 +13,9 @@ public class Santa : Enemy
     {
         lastAttackTime = Time.time;
 
+        if (animator != null)
+            animator.SetTrigger("Attack");
+
         if (spawnElvesNext)
             SpawnElves();
         else

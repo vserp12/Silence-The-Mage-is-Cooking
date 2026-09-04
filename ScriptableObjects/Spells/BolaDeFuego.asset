@@ -17,4 +17,4 @@ MonoBehaviour:
   damage: 30
   projectileSpeed: 10
   spellColor: {r: 0.9924528, g: 0.41768003, b: 0, a: 1}
-  projectilePrefab: {fileID: 7514419340198702025, guid: 405e3e8c39c8081478bdd250279c4572, type: 3}
+  projectilePrefab: {fileID: 7514419340198702025, guid: 7d855ac5a9d6ce69ba5318916a27a67a, type: 3}

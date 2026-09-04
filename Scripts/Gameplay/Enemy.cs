@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
 
     public Sprite bodySprite;
     public Sprite weaponSprite;
+    public Color bodyColor = Color.white;
+    public Vector2 weaponOffset = new Vector2(0.4f, -0.2f);
 
     public Transform healthBarFill;
     public GameObject healthBarContainer;
@@ -26,19 +28,26 @@ public class Enemy : MonoBehaviour
 
     protected Transform player;
     protected float lastAttackTime = 0f;
+    protected Animator animator;
 
     void Start()
     {
         currentHealth = maxHealth;
 
+        animator = GetComponent<Animator>();
+
         SpriteRenderer bodySR = GetComponent<SpriteRenderer>();
-        if (bodySR != null && bodySprite != null) bodySR.sprite = bodySprite;
+        if (bodySR != null)
+        {
+            bodySR.color = bodyColor;
+            if (bodySprite != null) bodySR.sprite = bodySprite;
+        }
 
         if (weaponSprite != null)
         {
             GameObject weaponObj = new GameObject("Weapon");
             weaponObj.transform.SetParent(transform);
-            weaponObj.transform.localPosition = Vector3.zero;
+            weaponObj.transform.localPosition = (Vector3)weaponOffset;
             SpriteRenderer weaponSR = weaponObj.AddComponent<SpriteRenderer>();
             weaponSR.sprite = weaponSprite;
             weaponSR.sortingOrder = (bodySR != null ? bodySR.sortingOrder : 0) + 1;
@@ -63,9 +72,9 @@ public class Enemy : MonoBehaviour
         if (player == null) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        bool isMoving = attackType == EnemyAttackType.Melee || distanceToPlayer > attackRange;
 
-        // Ranged enemies stop when in range; melee always close in
-        if (attackType == EnemyAttackType.Melee || distanceToPlayer > attackRange)
+        if (isMoving)
         {
             transform.position = Vector2.MoveTowards(
                 transform.position,
@@ -73,6 +82,9 @@ public class Enemy : MonoBehaviour
                 moveSpeed * Time.deltaTime
             );
         }
+
+        if (animator != null)
+            animator.SetBool("isMoving", isMoving);
 
         if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
         {
@@ -108,6 +120,9 @@ public class Enemy : MonoBehaviour
     {
         lastAttackTime = Time.time;
 
+        if (animator != null)
+            animator.SetTrigger("Attack");
+
         if (attackType == EnemyAttackType.Melee)
         {
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
@@ -130,6 +145,8 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        if (animator != null)
+            animator.SetBool("isDead", true);
         gameObject.SetActive(false);
     }
 }
