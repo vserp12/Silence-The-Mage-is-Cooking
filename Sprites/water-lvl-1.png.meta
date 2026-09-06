@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: c58e083cfbaa89e669c73d414e60457e
+guid: a64bc2aa5294e617a94ece5da3b94684
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -168421969075237668
-    second: pixil-frame-0 (2)_0
+      213: 3329114590802003810
+    second: water-lvl-1_0
   - first:
-      213: -249628310123516169
-    second: pixil-frame-0 (2)_1
+      213: 3138798455667969270
+    second: water-lvl-1_1
   - first:
-      213: 6950916264672091854
-    second: pixil-frame-0 (2)_2
+      213: 1642684121083309851
+    second: water-lvl-1_2
   - first:
-      213: 87419031593189281
-    second: pixil-frame-0 (2)_3
+      213: 4752042411599516454
+    second: water-lvl-1_3
+  - first:
+      213: -7553352508186934852
+    second: water-lvl-1_4
+  - first:
+      213: 607935482774716829
+    second: water-lvl-1_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -105,30 +111,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixil-frame-0 (2)_0
+      name: water-lvl-1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1519
-        width: 561
-        height: 462
+        x: 15
+        y: 1103
+        width: 546
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,64 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cdc06e88c15a9adf0800000000000000
-      internalID: -168421969075237668
+      spriteID: 267c259f414633e20800000000000000
+      internalID: 3329114590802003810
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pixil-frame-0 (2)_1
+      name: water-lvl-1_1
       rect:
         serializedVersion: 2
-        x: 619
-        y: 1519
-        width: 542
-        height: 462
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7fee431ef54298cf0800000000000000
-      internalID: -249628310123516169
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pixil-frame-0 (2)_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1159
-        width: 581
-        height: 342
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: eced343e38d967060800000000000000
-      internalID: 6950916264672091854
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pixil-frame-0 (2)_3
-      rect:
-        serializedVersion: 2
-        x: 619
-        y: 1159
+        x: 623
+        y: 1103
         width: 562
-        height: 342
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,8 +152,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1af78b46523963100800000000000000
-      internalID: 87419031593189281
+      spriteID: 6fc42abb0904f8b20800000000000000
+      internalID: 3138798455667969270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-lvl-1_2
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 511
+        width: 482
+        height: 546
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1f685b318cfbc610800000000000000
+      internalID: 1642684121083309851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-lvl-1_3
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 527
+        width: 498
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 623dafc5565a2f140800000000000000
+      internalID: 4752042411599516454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-lvl-1_4
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 15
+        width: 562
+        height: 626
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb14636c9e91d2790800000000000000
+      internalID: -7553352508186934852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: water-lvl-1_5
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 79
+        width: 578
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d918421c912df6800800000000000000
+      internalID: 607935482774716829
       vertices: []
       indices: 
       edges: []
@@ -223,10 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixil-frame-0 (2)_0: -168421969075237668
-      pixil-frame-0 (2)_1: -249628310123516169
-      pixil-frame-0 (2)_2: 6950916264672091854
-      pixil-frame-0 (2)_3: 87419031593189281
+      water-lvl-1_0: 3329114590802003810
+      water-lvl-1_1: 3138798455667969270
+      water-lvl-1_2: 1642684121083309851
+      water-lvl-1_3: 4752042411599516454
+      water-lvl-1_4: -7553352508186934852
+      water-lvl-1_5: 607935482774716829
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

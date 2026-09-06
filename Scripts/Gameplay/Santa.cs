@@ -13,13 +13,17 @@ public class Santa : Enemy
     {
         lastAttackTime = Time.time;
 
-        if (animator != null)
-            animator.SetTrigger("Attack");
-
         if (spawnElvesNext)
+        {
+            if (animator != null) animator.SetTrigger("SummonAttack");
             SpawnElves();
+        }
         else
+        {
+            if (animator != null) animator.SetTrigger("Attack");
+            if (weaponAnimator != null) weaponAnimator.SetTrigger("Attack");
             ShootProjectileAtPlayer();
+        }
 
         spawnElvesNext = !spawnElvesNext;
     }

@@ -305,7 +305,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1426617632508475257
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -369,6 +369,15 @@ MonoBehaviour:
   attackRange: 1
   damage: 10
   attackCooldown: 1
+  attackType: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 8
+  projectileVisuals: {fileID: 0}
+  bodySprite: {fileID: 0}
+  weaponSprite: {fileID: 0}
+  bodyColor: {r: 1, g: 1, b: 1, a: 1}
+  weaponOffset: {x: 0.4, y: -0.2}
+  weaponScale: 1
   healthBarFill: {fileID: 5698226297490484321}
   healthBarContainer: {fileID: 3617994350069355963}
 --- !u!95 &6111111111111111111

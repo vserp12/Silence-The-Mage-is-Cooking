@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public Sprite weaponSprite;
     public Color bodyColor = Color.white;
     public Vector2 weaponOffset = new Vector2(0.4f, -0.2f);
+    public float weaponScale = 1f;
 
     public Transform healthBarFill;
     public GameObject healthBarContainer;
@@ -29,34 +30,44 @@ public class Enemy : MonoBehaviour
     protected Transform player;
     protected float lastAttackTime = 0f;
     protected Animator animator;
+    protected Animator weaponAnimator;
+    protected SpriteRenderer bodySR;
+    protected Transform weaponChild;
+    private int facing = 0; // 0 = unset, 1 = right, -1 = left
 
     void Start()
     {
         currentHealth = maxHealth;
 
         animator = GetComponent<Animator>();
+        bodySR = GetComponent<SpriteRenderer>();
 
-        SpriteRenderer bodySR = GetComponent<SpriteRenderer>();
         if (bodySR != null)
         {
             bodySR.color = bodyColor;
             if (bodySprite != null) bodySR.sprite = bodySprite;
         }
 
-        if (weaponSprite != null)
+        Transform existingWeapon = transform.Find("Weapon");
+        if (existingWeapon != null)
+        {
+            weaponChild = existingWeapon;
+            weaponAnimator = existingWeapon.GetComponent<Animator>();
+        }
+        else if (weaponSprite != null)
         {
             GameObject weaponObj = new GameObject("Weapon");
             weaponObj.transform.SetParent(transform);
-            weaponObj.transform.localPosition = (Vector3)weaponOffset;
+            weaponObj.transform.localPosition = new Vector3(Mathf.Abs(weaponOffset.x), weaponOffset.y);
+            weaponObj.transform.localScale = Vector3.one * weaponScale;
             SpriteRenderer weaponSR = weaponObj.AddComponent<SpriteRenderer>();
             weaponSR.sprite = weaponSprite;
-            weaponSR.sortingOrder = (bodySR != null ? bodySR.sortingOrder : 0) + 1;
+            weaponSR.sortingOrder = (bodySR != null ? bodySR.sortingOrder : 0);
+            weaponChild = weaponObj.transform;
         }
 
         if (healthBarFill != null)
-        {
             originalBarScale = healthBarFill.localScale;
-        }
 
         UpdateHealthBar();
 
@@ -64,6 +75,7 @@ public class Enemy : MonoBehaviour
         if (playerObj != null)
         {
             player = playerObj.transform;
+            UpdateFacing(); // set initial facing immediately
         }
     }
 
@@ -83,12 +95,32 @@ public class Enemy : MonoBehaviour
             );
         }
 
+        UpdateFacing();
+
         if (animator != null)
             animator.SetBool("isMoving", isMoving);
 
         if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
-        {
             Attack();
+    }
+
+    void UpdateFacing()
+    {
+        if (player == null || bodySR == null) return;
+        int newFacing = player.position.x < transform.position.x ? -1 : 1;
+        if (newFacing == facing) return;
+        facing = newFacing;
+
+        bodySR.flipX = facing == -1;
+
+        if (weaponChild != null)
+        {
+            SpriteRenderer wsr = weaponChild.GetComponent<SpriteRenderer>();
+            if (wsr != null) wsr.flipX = facing == -1;
+            // Mirror weapon to the correct side
+            Vector3 pos = weaponChild.localPosition;
+            pos.x = Mathf.Abs(weaponOffset.x) * facing;
+            weaponChild.localPosition = pos;
         }
     }
 
@@ -96,11 +128,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= amount;
         UpdateHealthBar();
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        if (currentHealth <= 0) Die();
     }
 
     void UpdateHealthBar()
