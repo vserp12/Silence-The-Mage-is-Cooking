@@ -81,13 +81,13 @@ public class AnimatedDeathScreen : MonoBehaviour
 
         if (GUI.Button(new Rect(bx1, by, btnW, btnH), "Restart", btnStyle))
         {
-            Time.timeScale = 1f;
+            visible = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         if (GUI.Button(new Rect(bx2, by, btnW, btnH), "Main Menu", btnStyle))
         {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(0); // index 0 = MainMenu
+            visible = false;
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
