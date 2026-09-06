@@ -40,6 +40,8 @@ public class WaveManager : MonoBehaviour
             var p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) player = p.transform;
         }
+        if (spellSelectionUI == null)
+            spellSelectionUI = FindObjectOfType<SpellSelectionUI>();
     }
 
     void Start()
@@ -80,6 +82,16 @@ public class WaveManager : MonoBehaviour
         state = WaveState.SpellSelection;
         if (spellSelectionUI != null)
             spellSelectionUI.Show(currentWave);
+        else
+            StartCoroutine(AutoStart());
+    }
+
+    // Fallback: if no SpellSelectionUI is in the scene, start the wave automatically
+    IEnumerator AutoStart()
+    {
+        yield return new WaitForSeconds(1f);
+        if (state == WaveState.SpellSelection)
+            OnSpellSelected();
     }
 
     IEnumerator RunWave()

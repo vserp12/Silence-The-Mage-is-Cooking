@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 1111111111111011}
   - component: {fileID: 1111111111111012}
   - component: {fileID: 1111111111111013}
+  - component: {fileID: 8585303470997982257}
   m_Layer: 0
   m_Name: Santa
   m_TagString: Enemy
@@ -344,7 +345,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 3.7, y: 3.22}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -366,7 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Santa
   maxHealth: 100
   moveSpeed: 2
-  attackRange: 5
+  attackRange: 7
   damage: 15
   attackCooldown: 3
   attackType: 1
@@ -385,7 +386,7 @@ MonoBehaviour:
   elfSpawnRadius: 2
 --- !u!95 &1111111111111013
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -399,8 +400,23 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8585303470997982257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111111111111007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f2b30b97a9a0f3f8439444a4dda5cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterBob
+  bobSpeed: 12
+  stretchAmount: 0.12

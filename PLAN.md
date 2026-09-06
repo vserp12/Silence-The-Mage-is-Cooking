@@ -1,4 +1,102 @@
-# Silence! The Mage is Cooking — Implementation Plan
+# Silence! The Mage is Cooking — Implementation Plan (updated)
+
+## Issue Status
+| # | Title | Status |
+|---|-------|--------|
+| 1 | Make elf enemies, Santa, and more | ✅ CLOSED (done via EnemySetup) |
+| 2 | PR for issue #1 | ✅ MERGED |
+| 3 | Making character movement | 🔴 Code written, assets not created yet |
+| 4 | Applying actual spells | 🔴 Code written, assets not created yet |
+| 5 | Making the waves system | 🟡 Partially working (auto-starts, no UI yet) |
+
+---
+
+## Honest Status of Each Piece
+
+### ✅ Actually working right now (no editor scripts needed)
+- WaveManager state machine — now auto-starts a wave after 1 second if SpellSelectionUI is missing
+- SpellCaster — can cast if a `fallbackSpell` is assigned in the inspector (add one of the old SpellData SOs)
+- PlayerMovement + CharacterBob — bob activates as soon as CharacterBob component is on the player (not on prefab yet)
+- Enemy movement, attack, health
+- Enemy death → notifies WaveManager
+- Elf facing deadzone (no more rapid flip oscillation)
+- All spell behavior scripts (SpreadImpact, WaterFlowerAttack, FireAoEProjectile, ChainLightningProjectile)
+
+### ❌ Requires running editor scripts (Tools menu in Unity, Game scene open)
+- **Staff not visible** (player + elf): run `Tools > Setup Enemies` then `Tools > Setup Player`
+- **CharacterBob on enemies**: run `Tools > Setup Spells`
+- **Spell animations + prefabs + SpellDatabase**: run `Tools > Setup Spells`
+- **SpellSelectionUI panel in scene**: run `Tools > Setup Game Scene`
+- **WaveManager wired to SpellSelectionUI**: run `Tools > Setup Game Scene`
+
+### ⚠️ Known gaps not yet implemented
+- Player staff is NOT visible in idle/walk (doblepila sprites don't include staff). Staff only appears during attack animation after PlayerSetup runs.
+- No wave number HUD (only the between-wave label in SpellSelectionUI panel).
+
+---
+
+## Editor Script Execution Order (Game scene must be open)
+1. **Tools > Setup Enemies (Issue #1)** — creates elf/Santa weapon children with correct sprites
+2. **Tools > Setup Player (Issue #3)** — creates player animation clips + adds Animator/CharacterBob/PlayerSpellInventory to player
+3. **Tools > Setup Spells (Issue #4)** — creates all 13 spell animations, prefabs, SpellData SOs, SpellDatabase SO; adds CharacterBob+WeaponSwing to enemy prefabs
+4. **Tools > Setup Game Scene (Issues #3 #4 #5)** — adds SpellSelectionUI canvas + wires WaveManager
+5. Save scene (Ctrl+S)
+
+---
+
+## Issue #3 — Character Movement Animations
+
+**Requirement:** Hop/bounce animation while moving. Weapons animated via spritesheet on attack (except elf weapons which use code).
+
+- `CharacterBob.cs` ✅ written — squash-stretch scale on root transform when moving
+- `WeaponSwing.cs` ✅ written — coroutine rotation swing for elf weapon children
+- `Enemy.cs` ✅ updated — calls CharacterBob.SetMoving + WeaponSwing.Swing on attack
+- `PlayerMovement.cs` ✅ updated — calls CharacterBob.SetMoving
+- Player Animator (idle/attack/dead from spritesheets) ❌ needs PlayerSetup to run
+- CharacterBob + WeaponSwing on enemy prefabs ❌ needs SpellSetup.PatchEnemyPrefabs to run
+
+---
+
+## Issue #4 — Actual Spells
+
+**Sprite mapping:**
+| Spell | Asset | Frames | Status |
+|-------|-------|--------|--------|
+| Light | `light-sprite-sheet.png` pixil-frame-1_0..2 | 3 | ❌ asset not created |
+| Water 1 | `water-lvl-1.png` water-lvl-1_0..5 | 6 | ❌ asset not created |
+| Water 2 | `water-lvl-2-with-spread.png` pixil-frame-2_0..20 | 21 | ❌ asset not created |
+| Water 3 | `water-lvl-3.png` + spread | 1+27 | ❌ asset not created |
+| Water 4 | Flower (6× Water-3 petals in ring) | code | ❌ asset not created |
+| Fire 1 | `fire-lvl-1.png` julinaserrano_0..13 | 14 | ❌ asset not created |
+| Fire 2 | `fire-lvl-2-with-spread.png` pixil-frame-3_0..10 | 11 | ❌ asset not created |
+| Fire 3 | `fire-lvl-3.png` pixil-frame-6_0..3 | 4 | ❌ asset not created |
+| Fire 4 | `fire-lvl-4.png` wachin_0 + AOE | 1+code | ❌ asset not created |
+| Elec 1 | `electricity-lvl-1.png` pixil-frame-0_0 | 1 | ❌ asset not created |
+| Elec 2 | `electricity-lvl-2-with-spread.png` pixil-frame-4_0..13 | 14 | ❌ asset not created |
+| Elec 3 | `electricity-lvl-3.png` + spread (93 frames!) | 1+93 | ❌ asset not created |
+| Elec 4 | `electricity-lvl-4.png` wacho_0 + chain | 1+code | ❌ asset not created |
+
+SpellSetup.cs ✅ written — creates all the above when run from Tools menu.
+
+---
+
+## Issue #5 — Wave System
+
+**Game loop:**
+1. Game loads → WaveManager.Start() → EnterSpellSelection()
+2. If SpellSelectionUI present: shows panel, player picks spell, wave starts
+3. If SpellSelectionUI absent (fallback): auto-starts wave after 1 second
+4. Kill all enemies → 5s cooldown → back to step 2
+5. Wave N: `(2 + N×2)` elves, `floor(N/2)` magic, first Santa at wave 5
+6. Player dies → GameOverUI shows wave number
+
+**Status:**
+- WaveManager state machine ✅ written + null-safe fallback added
+- PlayerSpellInventory ✅ written
+- SpellSelectionUI ✅ written (needs GameSceneSetup to add to scene)
+- MainMenuUI.PlayGame() ✅ fixed (calls NameInputManager)
+- GameOverUI ✅ shows wave reached
+
 
 ## Issue Status
 | # | Title | Status |

@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class SpellCaster : MonoBehaviour
 {
     public SpellDatabase spellDatabase;
+    public SpellData fallbackSpell; // used until SpellSelectionUI assigns one
 
     private SpellData currentSpell;
     private float castProgress;
@@ -30,20 +31,20 @@ public class SpellCaster : MonoBehaviour
 
     void Update()
     {
-        if (currentSpell == null || currentSpell.projectilePrefab == null) return;
-        if (WaveManager.Instance == null || WaveManager.Instance.State != WaveState.WaveActive) return;
+        SpellData spell = currentSpell ?? fallbackSpell;
+        if (spell == null || spell.projectilePrefab == null) return;
 
         bool pressing = Mouse.current != null && Mouse.current.leftButton.isPressed;
 
         if (pressing)
         {
             if (!isCasting) isCasting = true;
-            castProgress += Time.deltaTime / currentSpell.castTime;
+            castProgress += Time.deltaTime / spell.castTime;
             UpdateCastBarVisual(Mathf.Clamp01(castProgress));
 
             if (castProgress >= 1f)
             {
-                CastSpell();
+                CastSpell(spell);
                 castProgress = 0f;
                 isCasting = false;
                 UpdateCastBarVisual(0f);
@@ -60,7 +61,7 @@ public class SpellCaster : MonoBehaviour
         }
     }
 
-    void CastSpell()
+    void CastSpell(SpellData spell)
     {
         if (Camera.main == null) return;
 
@@ -69,9 +70,9 @@ public class SpellCaster : MonoBehaviour
         mouseWorld.z = transform.position.z;
         Vector3 dir = (mouseWorld - transform.position).normalized;
 
-        var proj = Instantiate(currentSpell.projectilePrefab, transform.position, Quaternion.identity);
+        var proj = Instantiate(spell.projectilePrefab, transform.position, Quaternion.identity);
         var behavior = proj.GetComponent<ISpellBehavior>();
-        behavior?.Fire(dir, currentSpell);
+        behavior?.Fire(dir, spell);
 
         if (playerAnimator != null)
             playerAnimator.SetTrigger("Attack");

@@ -113,7 +113,9 @@ public class Enemy : MonoBehaviour
     void UpdateFacing()
     {
         if (player == null || bodySR == null) return;
-        int newFacing = player.position.x < transform.position.x ? -1 : 1;
+        float xDiff = player.position.x - transform.position.x;
+        if (Mathf.Abs(xDiff) < 0.15f) return; // deadzone prevents oscillation when player is directly in front
+        int newFacing = xDiff < 0f ? -1 : 1;
         if (newFacing == facing) return;
         facing = newFacing;
 
