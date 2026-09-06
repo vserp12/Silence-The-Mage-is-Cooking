@@ -6,7 +6,7 @@ public enum WaveState { Idle, SpellSelection, SpawningWave, WaveActive, WaveCool
 
 // ── Editor-only: auto-wires WaveManager + SpellCaster every time Play is pressed ──
 #if UNITY_EDITOR
-[UnityEditor.InitializeOnLoadMethod]
+[UnityEditor.InitializeOnLoad]
 static class WaveManagerPlayHook
 {
     static WaveManagerPlayHook()
