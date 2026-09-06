@@ -47,11 +47,15 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("¡Moriste!");
+        Time.timeScale = 0f;
+
+        // Attach the animated death screen to the main camera (OnGUI, no scene setup needed)
+        if (Camera.main != null && Camera.main.GetComponent<AnimatedDeathScreen>() == null)
+            Camera.main.gameObject.AddComponent<AnimatedDeathScreen>();
+
+        // Also trigger legacy GameOverUI if it's in the scene
         GameOverUI gameOver = FindObjectOfType<GameOverUI>();
         if (gameOver != null)
-        {
             gameOver.ShowGameOver();
-        }
     }
 }
