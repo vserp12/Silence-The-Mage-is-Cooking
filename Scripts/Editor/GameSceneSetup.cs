@@ -13,60 +13,66 @@ public static class GameSceneSetup
     [MenuItem("Tools/Setup Game Scene (Issues #3 #4 #5)")]
     public static void SetupGameScene()
     {
-        // ── GameBootstrap (runtime wiring) ────────────────────────────────
-        var bootstrap = Object.FindFirstObjectByType<GameBootstrap>();
-        if (bootstrap == null)
+        try
         {
-            bootstrap = new GameObject("GameBootstrap").AddComponent<GameBootstrap>();
+            Debug.Log("[GameSceneSetup] Step 1: GameBootstrap...");
+            var bootstrap = Object.FindFirstObjectByType<GameBootstrap>();
+            if (bootstrap == null)
+                bootstrap = new GameObject("GameBootstrap").AddComponent<GameBootstrap>();
+
+            bootstrap.elfMeleePrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/ElfMelee.prefab");
+            bootstrap.elfMagicPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/ElfMagic.prefab");
+            bootstrap.santaPrefab    = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Santa.prefab");
+            bootstrap.spellDatabase  = AssetDatabase.LoadAssetAtPath<SpellDatabase>("Assets/ScriptableObjects/SpellDatabase.asset");
+            EditorUtility.SetDirty(bootstrap);
+
+            Debug.Log("[GameSceneSetup] Step 2: WaveManager...");
+            var waveManager = Object.FindFirstObjectByType<WaveManager>();
+            if (waveManager != null)
+            {
+                waveManager.elfMeleePrefab = bootstrap.elfMeleePrefab;
+                waveManager.elfMagicPrefab = bootstrap.elfMagicPrefab;
+                waveManager.santaPrefab    = bootstrap.santaPrefab;
+                EditorUtility.SetDirty(waveManager);
+            }
+            else Debug.LogWarning("[GameSceneSetup] WaveManager not found in scene.");
+
+            Debug.Log("[GameSceneSetup] Step 3: SpellCaster...");
+            var caster = Object.FindFirstObjectByType<SpellCaster>();
+            if (caster != null && bootstrap.spellDatabase != null)
+            {
+                caster.spellDatabase = bootstrap.spellDatabase;
+                EditorUtility.SetDirty(caster);
+            }
+
+            Debug.Log("[GameSceneSetup] Step 4: EventSystem...");
+            EnsureEventSystem();
+
+            Debug.Log("[GameSceneSetup] Step 5: Canvas...");
+            var canvas = GetOrCreateCanvas();
+
+            Debug.Log("[GameSceneSetup] Step 6: SpellSelectionUI...");
+            var existingUI = Object.FindFirstObjectByType<SpellSelectionUI>();
+            if (existingUI == null)
+                BuildSpellSelectionPanel(canvas);
+
+            var selUI = Object.FindFirstObjectByType<SpellSelectionUI>();
+            if (waveManager != null && selUI != null)
+            {
+                waveManager.spellSelectionUI = selUI;
+                EditorUtility.SetDirty(waveManager);
+            }
+
+            Debug.Log("[GameSceneSetup] Step 7: Saving...");
+            EditorSceneManager.MarkAllScenesDirty();
+            AssetDatabase.SaveAssets();
+
+            Debug.Log("[GameSceneSetup] Done — press Ctrl+S to save the scene.");
         }
-
-        bootstrap.elfMeleePrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/ElfMelee.prefab");
-        bootstrap.elfMagicPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/ElfMagic.prefab");
-        bootstrap.santaPrefab    = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Santa.prefab");
-        bootstrap.spellDatabase  = AssetDatabase.LoadAssetAtPath<SpellDatabase>("Assets/ScriptableObjects/SpellDatabase.asset");
-        EditorUtility.SetDirty(bootstrap);
-
-        // ── WaveManager: also wire directly ───────────────────────────────
-        var waveManager = Object.FindFirstObjectByType<WaveManager>();
-        if (waveManager != null)
+        catch (System.Exception e)
         {
-            waveManager.elfMeleePrefab = bootstrap.elfMeleePrefab;
-            waveManager.elfMagicPrefab = bootstrap.elfMagicPrefab;
-            waveManager.santaPrefab    = bootstrap.santaPrefab;
-            EditorUtility.SetDirty(waveManager);
+            Debug.LogError($"[GameSceneSetup] FAILED at: {e.Message}\n{e.StackTrace}");
         }
-
-        // ── SpellCaster: wire SpellDatabase directly ───────────────────────
-        var caster = Object.FindFirstObjectByType<SpellCaster>();
-        if (caster != null && bootstrap.spellDatabase != null)
-        {
-            caster.spellDatabase = bootstrap.spellDatabase;
-            EditorUtility.SetDirty(caster);
-        }
-
-        // ── Canvas + EventSystem ──────────────────────────────────────────
-        EnsureEventSystem();
-        var canvas = GetOrCreateCanvas();
-
-        // ── SpellSelectionUI panel ────────────────────────────────────────
-        var existingUI = Object.FindFirstObjectByType<SpellSelectionUI>();
-        if (existingUI == null)
-            BuildSpellSelectionPanel(canvas);
-
-        // Wire WaveManager → SpellSelectionUI
-        var selUI = Object.FindFirstObjectByType<SpellSelectionUI>();
-        if (waveManager != null && selUI != null)
-        {
-            waveManager.spellSelectionUI = selUI;
-            EditorUtility.SetDirty(waveManager);
-        }
-
-        // ── Save scene ────────────────────────────────────────────────────
-        EditorSceneManager.SaveOpenScenes();
-
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-        Debug.Log("[GameSceneSetup] Done — scene saved.");
     }
 
     // ── UI builders ───────────────────────────────────────────────────────
