@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a6cf74ac2c3718385f842aaeee2a4f, type: 3}
+  m_Name: DeathScreenData
+  m_EditorClassIdentifier: Assembly-CSharp::DeathScreenData
+  frames:
+  - {fileID: -8849859827453329748, guid: 1b5a343c495a4374a9d81e01a1bdc1a1, type: 3}
+  - {fileID: 2821725321056959654, guid: 1b5a343c495a4374a9d81e01a1bdc1a1, type: 3}
+  - {fileID: 6921880661179243504, guid: 1b5a343c495a4374a9d81e01a1bdc1a1, type: 3}
+  - {fileID: 4424989365267210561, guid: 1b5a343c495a4374a9d81e01a1bdc1a1, type: 3}
+  - {fileID: 5558834444825065677, guid: 1b5a343c495a4374a9d81e01a1bdc1a1, type: 3}
+  - {fileID: -2256559677290637636, guid: 1b5a343c495a4374a9d81e01a1bdc1a1, type: 3}
+  - {fileID: 7912219955691986153, guid: 1b5a343c495a4374a9d81e01a1bdc1a1, type: 3}
+  - {fileID: 1886183513006006983, guid: 1b5a343c495a4374a9d81e01a1bdc1a1, type: 3}
+  - {fileID: 6797053551216763502, guid: 1b5a343c495a4374a9d81e01a1bdc1a1, type: 3}

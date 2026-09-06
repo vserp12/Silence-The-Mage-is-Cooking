@@ -75,7 +75,7 @@ public class AnimatedDeathScreen : MonoBehaviour
         const float btnW = 170f, btnH = 55f, gap = 24f;
         float bx1 = sw / 2f - btnW - gap / 2f;
         float bx2 = sw / 2f + gap / 2f;
-        float by  = sh / 2f + (wavesReached > 0 ? 90f : 60f);
+        float by  = sh * 0.82f;
 
         var btnStyle = new GUIStyle(GUI.skin.button) { fontSize = 18 };
 
@@ -87,7 +87,7 @@ public class AnimatedDeathScreen : MonoBehaviour
         if (GUI.Button(new Rect(bx2, by, btnW, btnH), "Main Menu", btnStyle))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene(0); // index 0 = MainMenu
         }
     }
 }
