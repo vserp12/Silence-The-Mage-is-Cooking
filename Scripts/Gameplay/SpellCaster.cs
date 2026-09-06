@@ -32,6 +32,9 @@ public class SpellCaster : MonoBehaviour
     void Update()
     {
         SpellData spell = currentSpell ?? fallbackSpell;
+        // Auto-use the lowest available spell so casting works before UI is set up
+        if (spell == null && spellDatabase != null)
+            spell = spellDatabase.GetSpell(ElementType.Water, 1);
         if (spell == null || spell.projectilePrefab == null) return;
 
         bool pressing = Mouse.current != null && Mouse.current.leftButton.isPressed;

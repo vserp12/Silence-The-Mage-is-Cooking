@@ -46,6 +46,15 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        // Delay one frame so all Awake() calls (including GameBootstrap) complete first
+        StartCoroutine(DelayedInit());
+    }
+
+    IEnumerator DelayedInit()
+    {
+        yield return null;
+        if (spellSelectionUI == null)
+            spellSelectionUI = FindObjectOfType<SpellSelectionUI>();
         EnterSpellSelection();
     }
 
