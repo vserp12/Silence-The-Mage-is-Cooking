@@ -324,8 +324,7 @@ public static class SpellSetup
         string[] enemyPrefabPaths = {
             "Assets/Prefabs/Enemies/ElfMelee.prefab",
             "Assets/Prefabs/Enemies/ElfMagic.prefab",
-            "Assets/Prefabs/Enemies/Santa.prefab",
-            "Assets/Prefabs/Enemies/Enemy.prefab"
+            "Assets/Prefabs/Enemies/Santa.prefab"
         };
 
         foreach (var path in enemyPrefabPaths)

@@ -55,6 +55,7 @@ public static class EnemySetup
         // ── Animator controllers ──────────────────────────────────────────────
         var elfCtrl = BuildElfController(elfIdle, elfWalk);
         var santaCtrl = BuildSantaController(santaIdle, santaMagic, santaSummon);
+        BuildGenericEnemyController(elfIdle, elfWalk); // rebuilds EnemyAnimator with correct trigger conditions
 
         // ── Configure enemy prefabs ───────────────────────────────────────────
         ConfigureElfMelee(elfBody0, rakeSprite, elfCtrl);
@@ -103,6 +104,28 @@ public static class EnemySetup
     // ─────────────────────────────────────────────────────────────────────────
     // Animator controller builders
     // ─────────────────────────────────────────────────────────────────────────
+
+    static AnimatorController BuildGenericEnemyController(AnimationClip idle, AnimationClip walk)
+    {
+        string path = "Assets/Prefabs/Enemies/EnemyAnimator.controller";
+        var ctrl = GetOrCreateController(path, "EnemyAnimator");
+        AddParam(ctrl, "isMoving", AnimatorControllerParameterType.Bool);
+        AddParam(ctrl, "Attack",   AnimatorControllerParameterType.Trigger);
+        AddParam(ctrl, "isDead",   AnimatorControllerParameterType.Bool);
+        var sm = ctrl.layers[0].stateMachine;
+        var idleS = AddOrUpdateState(sm, "Idle",   idle);
+        var walkS = AddOrUpdateState(sm, "Walk",   walk);
+        var atkS  = AddOrUpdateState(sm, "Attack", idle);
+        var deadS = AddOrUpdateState(sm, "Death",  idle);
+        sm.defaultState = idleS;
+        AddTransitionIfMissing(idleS, walkS, "isMoving", AnimatorConditionMode.If,    0, 0.1f, false);
+        AddTransitionIfMissing(walkS, idleS, "isMoving", AnimatorConditionMode.IfNot, 0, 0.1f, false);
+        AddAnyTransitionIfMissing(sm, atkS,  "Attack",  AnimatorConditionMode.If, 0, 0.05f, false);
+        AddExitTransitionIfMissing(atkS, idleS, 1f, 0.1f);
+        AddAnyTransitionIfMissing(sm, deadS, "isDead",  AnimatorConditionMode.If, 0, 0.1f,  false);
+        EditorUtility.SetDirty(ctrl);
+        return ctrl;
+    }
 
     static AnimatorController BuildElfController(AnimationClip idle, AnimationClip walk)
     {
