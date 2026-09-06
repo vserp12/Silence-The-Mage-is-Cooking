@@ -252,8 +252,9 @@ public static class EnemySetup
 
     static AnimatorController GetOrCreateController(string path, string name)
     {
-        var existing = AssetDatabase.LoadAssetAtPath<AnimatorController>(path);
-        if (existing != null) return existing;
+        // Always recreate to avoid stale transition condition types from manual YAML edits
+        if (AssetDatabase.LoadAssetAtPath<AnimatorController>(path) != null)
+            AssetDatabase.DeleteAsset(path);
         return AnimatorController.CreateAnimatorControllerAtPath(path);
     }
 
