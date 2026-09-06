@@ -15,29 +15,29 @@ public static class SpellSetup
         EnsureFolders();
 
         // ── Build all spell assets ─────────────────────────────────────────
-        var water1  = MakeBasicSpell("Water1",    "water-lvl-1.png",                 "water-lvl-1",        6,  ElementType.Water,       1, 0.8f, 15f, 12f, 1.2f, Color.cyan);
-        var water2  = MakeBasicSpell("Water2",    "water-lvl-2-with-spread.png",     "pixil-frame-2",     21,  ElementType.Water,       2, 1.0f, 25f, 11f, 1.6f, Color.cyan);
+        var water1  = MakeBasicSpell("Water1",    "water-lvl-1.png",                 "water-lvl-1",        6,  ElementType.Water,       1, 0.8f, 15f, 12f, 0.35f, Color.cyan);
+        var water2  = MakeBasicSpell("Water2",    "water-lvl-2-with-spread.png",     "pixil-frame-2",     21,  ElementType.Water,       2, 1.0f, 25f, 11f, 0.40f, Color.cyan);
         var water3  = MakeSpreadSpell("Water3",   "water-lvl-3.png",                 "pixil-frame-5",      1,
                                                   "water-lvl-3-spread.png",          "pixil-frame-9",     27,
-                                                  ElementType.Water, 3, 1.2f, 40f, 10f, 2.5f, Color.cyan);
+                                                  ElementType.Water, 3, 1.2f, 40f, 10f, 0.70f, Color.cyan);
         var water4  = MakeFlowerSpell("Water4",   ElementType.Water, 4, 1.5f, 20f);
 
-        var fire1   = MakeBasicSpell("Fire1",     "fire-lvl-1.png",                  "julinaserrano",     14,  ElementType.Fire,        1, 0.7f, 15f, 14f, 1.0f, new Color(1f, 0.4f, 0f));
-        var fire2   = MakeBasicSpell("Fire2",     "fire-lvl-2-with-spread.png",      "pixil-frame-3",     11,  ElementType.Fire,        2, 0.9f, 30f, 12f, 1.2f, new Color(1f, 0.4f, 0f));
-        var fire3   = MakeBasicSpell("Fire3",     "fire-lvl-3.png",                  "pixil-frame-6",      4,  ElementType.Fire,        3, 1.1f, 50f, 10f, 1.5f, new Color(1f, 0.2f, 0f));
+        var fire1   = MakeBasicSpell("Fire1",     "fire-lvl-1.png",                  "julinaserrano",     14,  ElementType.Fire,        1, 0.7f, 15f, 14f, 0.35f, new Color(1f, 0.4f, 0f));
+        var fire2   = MakeBasicSpell("Fire2",     "fire-lvl-2-with-spread.png",      "pixil-frame-3",     11,  ElementType.Fire,        2, 0.9f, 30f, 12f, 0.40f, new Color(1f, 0.4f, 0f));
+        var fire3   = MakeBasicSpell("Fire3",     "fire-lvl-3.png",                  "pixil-frame-6",      4,  ElementType.Fire,        3, 1.1f, 50f, 10f, 0.45f, new Color(1f, 0.2f, 0f));
         var fire4   = MakeAoESpell("Fire4",       "fire-lvl-4.png",                  "wachin_0",
-                                                  ElementType.Fire, 4, 1.5f, 80f, 4f, 3.5f, new Color(1f, 0.1f, 0f));
+                                                  ElementType.Fire, 4, 1.5f, 80f, 4f, 2.0f, new Color(1f, 0.1f, 0f));
 
         var elec1   = MakeSingleFrameSpell("Elec1", "electricity-lvl-1.png",         "pixil-frame-0_0",
-                                                  ElementType.Electricity, 1, 0.5f, 12f, 18f, 0.8f, Color.yellow);
-        var elec2   = MakeBasicSpell("Elec2",    "electricity-lvl-2-with-spread.png","pixil-frame-4",     14,  ElementType.Electricity, 2, 0.7f, 25f, 16f, 1.2f, Color.yellow);
+                                                  ElementType.Electricity, 1, 0.5f, 12f, 18f, 0.35f, Color.yellow);
+        var elec2   = MakeBasicSpell("Elec2",    "electricity-lvl-2-with-spread.png","pixil-frame-4",     14,  ElementType.Electricity, 2, 0.7f, 25f, 16f, 0.40f, Color.yellow);
         var elec3   = MakeSpreadSpell("Elec3",   "electricity-lvl-3.png",             "pixil-frame-7",     1,
                                                   "electricity-lvl-3-spread.png",    "pixil-frame-8",     93,
-                                                  ElementType.Electricity, 3, 1.0f, 45f, 15f, 3.0f, Color.yellow);
+                                                  ElementType.Electricity, 3, 1.0f, 45f, 15f, 0.70f, Color.yellow);
         var elec4   = MakeChainSpell("Elec4",    "electricity-lvl-4.png",            "wacho_0",
                                                   ElementType.Electricity, 4, 1.3f, 35f, 18f, 5f, Color.yellow);
 
-        var light   = MakeBasicSpell("Light1",   "light-sprite-sheet.png",           "pixil-frame-1",      3,  ElementType.Light,       1, 0.4f, 20f, 20f, 1.0f, Color.white);
+        var light   = MakeBasicSpell("Light1",   "light-sprite-sheet.png",           "pixil-frame-1",      3,  ElementType.Light,       1, 0.4f, 20f, 20f, 0.35f, Color.white);
 
         // ── Populate SpellDatabase ─────────────────────────────────────────
         BuildSpellDatabase(water1, water2, water3, water4,

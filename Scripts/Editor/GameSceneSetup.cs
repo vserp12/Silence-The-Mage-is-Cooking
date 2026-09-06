@@ -28,14 +28,16 @@ public static class GameSceneSetup
 
             Debug.Log("[GameSceneSetup] Step 2: WaveManager...");
             var waveManager = Object.FindFirstObjectByType<WaveManager>();
-            if (waveManager != null)
+            if (waveManager == null)
             {
-                waveManager.elfMeleePrefab = bootstrap.elfMeleePrefab;
-                waveManager.elfMagicPrefab = bootstrap.elfMagicPrefab;
-                waveManager.santaPrefab    = bootstrap.santaPrefab;
-                EditorUtility.SetDirty(waveManager);
+                var wmGO = new GameObject("WaveManager");
+                waveManager = wmGO.AddComponent<WaveManager>();
+                Debug.Log("[GameSceneSetup] Created new WaveManager GameObject in scene.");
             }
-            else Debug.LogWarning("[GameSceneSetup] WaveManager not found in scene.");
+            waveManager.elfMeleePrefab = bootstrap.elfMeleePrefab;
+            waveManager.elfMagicPrefab = bootstrap.elfMagicPrefab;
+            waveManager.santaPrefab    = bootstrap.santaPrefab;
+            EditorUtility.SetDirty(waveManager);
 
             Debug.Log("[GameSceneSetup] Step 3: SpellCaster...");
             var caster = Object.FindFirstObjectByType<SpellCaster>();

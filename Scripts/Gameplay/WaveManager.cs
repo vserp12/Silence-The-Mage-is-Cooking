@@ -2,54 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WaveState { Idle, SpellSelection, SpawningWave, WaveActive, WaveCooldown }
-
-// ── Editor-only: auto-wires WaveManager + SpellCaster every time Play is pressed ──
-#if UNITY_EDITOR
-[UnityEditor.InitializeOnLoad]
-static class WaveManagerPlayHook
-{
-    static WaveManagerPlayHook()
-    {
-        UnityEditor.EditorApplication.playModeStateChanged += OnPlayModeChange;
-    }
-
-    static void OnPlayModeChange(UnityEditor.PlayModeStateChange state)
-    {
-        if (state != UnityEditor.PlayModeStateChange.ExitingEditMode) return;
-
-        var wm = Object.FindFirstObjectByType<WaveManager>();
-        if (wm != null)
-        {
-            Wire(ref wm.elfMeleePrefab, "Assets/Prefabs/Enemies/ElfMelee.prefab");
-            Wire(ref wm.elfMagicPrefab, "Assets/Prefabs/Enemies/ElfMagic.prefab");
-            Wire(ref wm.santaPrefab,    "Assets/Prefabs/Enemies/Santa.prefab");
-        }
-
-        var sc = Object.FindFirstObjectByType<SpellCaster>();
-        if (sc != null && sc.spellDatabase == null)
-        {
-            var db = UnityEditor.AssetDatabase.LoadAssetAtPath<SpellDatabase>(
-                "Assets/ScriptableObjects/SpellDatabase.asset");
-            if (db != null) sc.spellDatabase = db;
-        }
-    }
-
-    static void Wire(ref GameObject field, string path)
-    {
-        if (field != null) return;
-        field = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
-    }
-}
-#endif
-// ──────────────────────────────────────────────────────────────────────────────
+public enum WaveState { Idle, InitialSpellSelection, SpawningWave, WaveActive, Intermission }
 
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance;
 
     [Header("Enemy Prefabs")]
-    public GameObject enemyPrefab;
     public GameObject elfMeleePrefab;
     public GameObject elfMagicPrefab;
     public GameObject santaPrefab;
@@ -57,54 +16,89 @@ public class WaveManager : MonoBehaviour
     [Header("Spawn Settings")]
     public Transform player;
     public float spawnRadius = 8f;
-    public float spawnDelay = 0.4f;     // seconds between each individual spawn
+    public float spawnDelay = 0.35f;
 
-    [Header("Wave Timing")]
-    public float cooldownDuration = 5f;
-
-    [Header("UI")]
-    public SpellSelectionUI spellSelectionUI;
+    [Header("Intermission Timing")]
+    public float intermissionDuration = 20f;
 
     private int currentWave = 0;
     private int enemiesAlive = 0;
     private WaveState state = WaveState.Idle;
+    private RuntimeSpellSelection spellUI;
 
     public WaveState State => state;
     public int CurrentWave => currentWave;
+    public int EnemiesAlive => enemiesAlive;
 
     void Awake()
     {
         Instance = this;
+        ResolveReferences();
+    }
+
+    void Start()
+    {
+        StartCoroutine(DelayedStart());
+    }
+
+    void ResolveReferences()
+    {
         if (player == null)
         {
             var p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) player = p.transform;
         }
-        if (spellSelectionUI == null)
-            spellSelectionUI = FindObjectOfType<SpellSelectionUI>();
+
+        #if UNITY_EDITOR
+        if (elfMeleePrefab == null)
+            elfMeleePrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/ElfMelee.prefab");
+        if (elfMagicPrefab == null)
+            elfMagicPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/ElfMagic.prefab");
+        if (santaPrefab == null)
+            santaPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Santa.prefab");
+        #endif
+
+        if (elfMeleePrefab == null) elfMeleePrefab = Resources.Load<GameObject>("Enemies/ElfMelee") ?? Resources.Load<GameObject>("ElfMelee");
+        if (elfMagicPrefab == null) elfMagicPrefab = Resources.Load<GameObject>("Enemies/ElfMagic") ?? Resources.Load<GameObject>("ElfMagic");
+        if (santaPrefab == null)    santaPrefab    = Resources.Load<GameObject>("Enemies/Santa")    ?? Resources.Load<GameObject>("Santa");
+
+        spellUI = GetComponent<RuntimeSpellSelection>() ?? gameObject.AddComponent<RuntimeSpellSelection>();
     }
 
-    void Start()
+    IEnumerator DelayedStart()
     {
-        // Delay one frame so all Awake() calls (including GameBootstrap) complete first
-        StartCoroutine(DelayedInit());
+        yield return null; // wait one frame for all scene objects to initialize
+        EnterInitialSpellSelection();
     }
 
-    IEnumerator DelayedInit()
+    // ── Initial Selection ──────────────────────────────────────────────────
+
+    void EnterInitialSpellSelection()
     {
-        yield return null;
-        if (spellSelectionUI == null)
-            spellSelectionUI = FindObjectOfType<SpellSelectionUI>();
-        EnterSpellSelection();
+        state = WaveState.InitialSpellSelection;
+        if (spellUI == null) spellUI = GetComponent<RuntimeSpellSelection>() ?? gameObject.AddComponent<RuntimeSpellSelection>();
+
+        spellUI.ShowInitialSelection(chosenElem =>
+        {
+            spellUI.Hide();
+            int lvl = PlayerSpellInventory.Instance != null ? PlayerSpellInventory.Instance.SelectElement(chosenElem) : 1;
+            FindObjectOfType<SpellCaster>()?.SetSpellByElement(chosenElem, lvl);
+            StartCoroutine(RunWave(1));
+        });
     }
 
-    // ── Public API ─────────────────────────────────────────────────────────
+    // ── Spawning and Waves ──────────────────────────────────────────────────
+
+    public void OnEnemySpawned()
+    {
+        enemiesAlive++;
+    }
 
     public void SpawnEnemy(GameObject prefab)
     {
         if (prefab == null || player == null) return;
         float angle = Random.Range(0f, Mathf.PI * 2f);
-        Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * spawnRadius;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * spawnRadius;
         Instantiate(prefab, player.position + offset, Quaternion.identity);
         enemiesAlive++;
     }
@@ -113,84 +107,95 @@ public class WaveManager : MonoBehaviour
     public void EnemyDied()
     {
         enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
-        if (state == WaveState.WaveActive && enemiesAlive == 0)
-            StartCoroutine(DelayedWaveClear());
-    }
-
-    // Called by SpellSelectionUI once the player confirms a spell choice
-    public void OnSpellSelected()
-    {
-        if (spellSelectionUI != null) spellSelectionUI.Hide();
-        StartCoroutine(RunWave());
-    }
-
-    // ── State Machine ──────────────────────────────────────────────────────
-
-    void EnterSpellSelection()
-    {
-        state = WaveState.SpellSelection;
-        if (spellSelectionUI != null)
+        if (state == WaveState.WaveActive && enemiesAlive <= 0)
         {
-            spellSelectionUI.Show(currentWave);
-        }
-        else
-        {
-            // Create an OnGUI-based selection that needs no scene setup
-            var rss = GetComponent<RuntimeSpellSelection>() ?? gameObject.AddComponent<RuntimeSpellSelection>();
-            rss.Show(currentWave, elem =>
-            {
-                rss.Hide();
-                int lvl = PlayerSpellInventory.Instance?.SelectElement(elem) ?? 1;
-                FindObjectOfType<SpellCaster>()?.SetSpellByElement(elem, lvl);
-                OnSpellSelected();
-            });
+            StartCoroutine(DelayedIntermission());
         }
     }
 
-    IEnumerator RunWave()
+    IEnumerator RunWave(int waveNum)
     {
-        currentWave++;
+        currentWave = waveNum;
         state = WaveState.SpawningWave;
         enemiesAlive = 0;
 
-        foreach (var (prefab, count) in BuildWaveSpawns(currentWave))
+        var spawns = BuildWaveSpawns(currentWave);
+        foreach (var prefab in spawns)
         {
-            for (int i = 0; i < count; i++)
-            {
-                SpawnEnemy(prefab);
-                yield return new WaitForSeconds(spawnDelay);
-            }
+            SpawnEnemy(prefab);
+            yield return new WaitForSeconds(spawnDelay);
         }
 
         state = WaveState.WaveActive;
-        // Edge case: if all enemies somehow died during spawning
-        if (enemiesAlive == 0)
-            StartCoroutine(DelayedWaveClear());
+
+        // In case an enemy died instantly
+        if (enemiesAlive <= 0)
+        {
+            StartCoroutine(DelayedIntermission());
+        }
     }
 
-    IEnumerator DelayedWaveClear()
+    IEnumerator DelayedIntermission()
     {
-        yield return new WaitForSeconds(1.2f); // let death animations play
-        if (enemiesAlive > 0) yield break;     // more enemies spawned meanwhile
-        state = WaveState.WaveCooldown;
-        yield return new WaitForSeconds(cooldownDuration);
-        EnterSpellSelection();
+        yield return new WaitForSeconds(1f); // let death animations finish
+        if (enemiesAlive > 0) yield break;
+
+        EnterIntermission();
     }
 
-    // ── Procedural wave composition ────────────────────────────────────────
-
-    List<(GameObject prefab, int count)> BuildWaveSpawns(int wave)
+    void EnterIntermission()
     {
-        var list = new List<(GameObject, int)>();
+        state = WaveState.Intermission;
+        if (spellUI == null) spellUI = GetComponent<RuntimeSpellSelection>() ?? gameObject.AddComponent<RuntimeSpellSelection>();
+
+        spellUI.ShowIntermission(
+            clearedWave: currentWave,
+            duration: intermissionDuration,
+            onPick: chosenElem =>
+            {
+                int lvl = PlayerSpellInventory.Instance != null ? PlayerSpellInventory.Instance.SelectElement(chosenElem) : 1;
+                FindObjectOfType<SpellCaster>()?.SetSpellByElement(chosenElem, lvl);
+            },
+            onStartWave: () =>
+            {
+                StartCoroutine(RunWave(currentWave + 1));
+            }
+        );
+    }
+
+    // ── Wave Composition ───────────────────────────────────────────────────
+
+    List<GameObject> BuildWaveSpawns(int wave)
+    {
+        var list = new List<GameObject>();
 
         int totalElves = 2 + wave * 2;
         int magicCount = wave / 2;
-        int meleeCount = totalElves - magicCount;
-        int santaCount = Mathf.Max(0, (wave - 4) / 5); // first Santa at wave 5
+        int meleeCount = Mathf.Max(1, totalElves - magicCount);
 
-        if (elfMeleePrefab != null && meleeCount > 0) list.Add((elfMeleePrefab, meleeCount));
-        if (elfMagicPrefab != null && magicCount > 0)  list.Add((elfMagicPrefab, magicCount));
-        if (santaPrefab != null && santaCount > 0)     list.Add((santaPrefab, santaCount));
+        // First Santa boss at Wave 5, then every 5 waves (wave 5, 10, 15...)
+        int santaCount = (wave % 5 == 0) ? (wave / 5) : 0;
+
+        // Interleave melee and magic so spawns are varied
+        int mAdded = 0, mgAdded = 0;
+        while (mAdded < meleeCount || mgAdded < magicCount)
+        {
+            if (mAdded < meleeCount && elfMeleePrefab != null)
+            {
+                list.Add(elfMeleePrefab);
+                mAdded++;
+            }
+            if (mgAdded < magicCount && elfMagicPrefab != null)
+            {
+                list.Add(elfMagicPrefab);
+                mgAdded++;
+            }
+        }
+
+        for (int i = 0; i < santaCount; i++)
+        {
+            if (santaPrefab != null) list.Add(santaPrefab);
+        }
 
         return list;
     }

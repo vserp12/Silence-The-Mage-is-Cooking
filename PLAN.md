@@ -1,205 +1,109 @@
-# Silence! The Mage is Cooking — Implementation Plan (updated)
+# Proyecto Silencio: The Mage is Cooking - Plan de Desarrollo e Implementación
 
-## Issue Status
-| # | Title | Status |
-|---|-------|--------|
-| 1 | Make elf enemies, Santa, and more | ✅ CLOSED (done via EnemySetup) |
-| 2 | PR for issue #1 | ✅ MERGED |
-| 3 | Making character movement | 🔴 Code written, assets not created yet |
-| 4 | Applying actual spells | 🔴 Code written, assets not created yet |
-| 5 | Making the waves system | 🟡 Partially working (auto-starts, no UI yet) |
+## 1. Auditoría del Proyecto y Estado de Issues de GitHub (en orden cronológico)
 
----
+### Issue #1: "Make elf enemies, santa, and more."
+- **Estado GitHub**: Cerrado.
+- **Estado Real**: ~65% completado (incompleto y con bugs graves).
+- **Detalle de lo que faltaba o estaba roto**:
+  1. **Dirección de Sprites Invertida**: Los sprites originales de los elfos y Santa miran de forma natural hacia la IZQUIERDA. El script `Enemy.cs` ponía `bodySR.flipX = (facing == -1)`. Al moverse a la izquierda hacia el jugador, activaba `flipX = true`, haciendo que el elfo mire a la derecha mientras camina a la izquierda, y viceversa.
+  2. **Armas de los Elfos**: La posición `weaponOffset` y el espejo del arma quedaban desfasados con respecto a la orientación del cuerpo.
+  3. **Santa**: `Santa.cs` tiene la lógica básica de alternar entre invocar 3 elfos y disparar proyectiles de hielo, pero no estaba conectado al sistema de oleadas ni a la oleada 5.
 
-## Honest Status of Each Piece
+### Issue #2: "no more git problems, please" (Pull Request #2)
+- **Estado GitHub**: Abierto.
+- **Estado Real**: Rama desincronizada con archivos temporales y eliminaciones sin commitear.
 
-### ✅ Actually working right now (no editor scripts needed)
-- WaveManager state machine — now auto-starts a wave after 1 second if SpellSelectionUI is missing
-- SpellCaster — can cast if a `fallbackSpell` is assigned in the inspector (add one of the old SpellData SOs)
-- PlayerMovement + CharacterBob — bob activates as soon as CharacterBob component is on the player (not on prefab yet)
-- Enemy movement, attack, health
-- Enemy death → notifies WaveManager
-- Elf facing deadzone (no more rapid flip oscillation)
-- All spell behavior scripts (SpreadImpact, WaterFlowerAttack, FireAoEProjectile, ChainLightningProjectile)
+### Issue #3: "Making character movement"
+- **Estado GitHub**: Abierto.
+- **Estado Real**: ~60% completado (incompleto y con bugs).
+- **Detalle de lo que faltaba o estaba roto**:
+  1. **Dirección del Jugador Invertida**: En `PlayerMovement.cs`, `if (movement.x > 0.01f) sr.flipX = false; else if (movement.x < -0.01f) sr.flipX = true;`. Dado que el sprite del mago mira hacia la IZQUIERDA en la textura base, al moverse a la derecha no se volteaba y al moverse a la izquierda se volteaba a la derecha. ¡Iba caminando hacia atrás!
+  2. **Salto retro (Bob/Hop)**: `CharacterBob.cs` aplicaba squash-stretch a todo el transform raíz incluyendo hijos de interfaz y posición de pivote. Requiere un rebote limpio y retro sin descalibrar armas ni barras de vida.
+  3. **Animación de báculo y ataque**: Animaciones de ataque sincronizadas con `StaffAim`.
 
-### ❌ Requires running editor scripts (Tools menu in Unity, Game scene open)
-- **Staff not visible** (player + elf): run `Tools > Setup Enemies` then `Tools > Setup Player`
-- **CharacterBob on enemies**: run `Tools > Setup Spells`
-- **Spell animations + prefabs + SpellDatabase**: run `Tools > Setup Spells`
-- **SpellSelectionUI panel in scene**: run `Tools > Setup Game Scene`
-- **WaveManager wired to SpellSelectionUI**: run `Tools > Setup Game Scene`
+### Issue #4: "Aplying actual spells"
+- **Estado GitHub**: Abierto.
+- **Estado Real**: ~60% completado (incompleto y con bugs de escala).
+- **Detalle de lo que faltaba o estaba roto**:
+  1. **Tamaño EXCESIVO de los Hechizos**: Los proyectiles y efectos de impacto tenían escalas entre 1.0 y 2.5, mientras que el jugador tiene escala 0.1 y los elfos 0.7. Los hechizos eran gigantescos comparados con los personajes.
+  2. **Hechizos planos sin dinamismo**: Electricidad 4, Fuego 3 y Fuego 4 requerían efectos dinámicos en código (flicker, jitter de chispas, rotación y pulso ígneo, área de daño por impacto).
+  3. **Agua 4 (Flor)**: `WaterFlowerAttack.cs` requería rotación radial orientada de los 6 pétalos en círculo con propagación expansiva.
 
-### ⚠️ Known gaps not yet implemented
-- Player staff is NOT visible in idle/walk (doblepila sprites don't include staff). Staff only appears during attack animation after PlayerSetup runs.
-- No wave number HUD (only the between-wave label in SpellSelectionUI panel).
+### Issue #5: "Making the waves system."
+- **Estado GitHub**: Abierto.
+- **Estado Real**: ~20% completado (gravemente roto y ausente en escena).
+- **Detalle de lo que faltaba o estaba roto**:
+  1. **WaveManager ausente en la escena Game.unity**: No existía el GameObject ni componente en la escena; el jugador tenía que arrastrar elfos a mano para probar el juego.
+  2. **Menú de Selección de Hechizo al Inicio ausente**: Al dar Play a la escena Game, no aparecía ningún menú para seleccionar el hechizo inicial.
+  3. **Menú de Mejoras de Estadísticas (Stats) NUNCA IMPLEMENTADO**: El issue requería explícitamente un menú de estadísticas para subir: HP, Velocidad (Speed), Daño (Damage) y Reducción de Enfriamiento (Cooldown Reduction). No existía ni la clase ni la UI.
+  4. **Tiempo de recuperación de 20 segundos ausente**: El juego solo esperaba 5 segundos silenciosos sin interfaz de descanso ni cuenta regresiva.
+  5. **Jefe Santa en la Oleada 5**: No estaba instanciado en oleada 5.
 
----
+### Issue #6: "Functional camera"
+- **Estado GitHub**: Abierto.
+- **Estado Real**: ~40% completado.
+- **Detalle de lo que faltaba o estaba roto**:
+  1. `CameraFollow.cs` solo seguía al jugador mediante un Lerp básico.
+  2. No tenía ningún límite (clamp) con los bordes del mapa (el plano de 20x15).
 
-## Editor Script Execution Order (Game scene must be open)
-1. **Tools > Setup Enemies (Issue #1)** — creates elf/Santa weapon children with correct sprites
-2. **Tools > Setup Player (Issue #3)** — creates player animation clips + adds Animator/CharacterBob/PlayerSpellInventory to player
-3. **Tools > Setup Spells (Issue #4)** — creates all 13 spell animations, prefabs, SpellData SOs, SpellDatabase SO; adds CharacterBob+WeaponSwing to enemy prefabs
-4. **Tools > Setup Game Scene (Issues #3 #4 #5)** — adds SpellSelectionUI canvas + wires WaveManager
-5. Save scene (Ctrl+S)
-
----
-
-## Issue #3 — Character Movement Animations
-
-**Requirement:** Hop/bounce animation while moving. Weapons animated via spritesheet on attack (except elf weapons which use code).
-
-- `CharacterBob.cs` ✅ written — squash-stretch scale on root transform when moving
-- `WeaponSwing.cs` ✅ written — coroutine rotation swing for elf weapon children
-- `Enemy.cs` ✅ updated — calls CharacterBob.SetMoving + WeaponSwing.Swing on attack
-- `PlayerMovement.cs` ✅ updated — calls CharacterBob.SetMoving
-- Player Animator (idle/attack/dead from spritesheets) ❌ needs PlayerSetup to run
-- CharacterBob + WeaponSwing on enemy prefabs ❌ needs SpellSetup.PatchEnemyPrefabs to run
+### Problemas Adicionales Reportados por el Usuario:
+- **Audio entre Escenas**: En `Game.unity`, `SceneMusic.cs` tenía un GUID corrupto/inexistente (`9cccaa8b28a37b4408b8dbf8a401a5ba`), por lo que al pasar del menú al juego, `AudioManager.PlayMusic(null)` no hacía nada y seguía sonando la música del menú principal (`MenuMusic.mp3`) en lugar de `GameMusic.mp3`.
+- **Cero Configuración Manual para el Usuario**: El usuario no debe arrastrar ni configurar nada en el Inspector de Unity. Todo debe quedar cableado en la escena, en los prefabs y con inicialización automática a prueba de fallos en runtime.
 
 ---
 
-## Issue #4 — Actual Spells
+## 2. Orden de Implementación Controlado
 
-**Sprite mapping:**
-| Spell | Asset | Frames | Status |
-|-------|-------|--------|--------|
-| Light | `light-sprite-sheet.png` pixil-frame-1_0..2 | 3 | ❌ asset not created |
-| Water 1 | `water-lvl-1.png` water-lvl-1_0..5 | 6 | ❌ asset not created |
-| Water 2 | `water-lvl-2-with-spread.png` pixil-frame-2_0..20 | 21 | ❌ asset not created |
-| Water 3 | `water-lvl-3.png` + spread | 1+27 | ❌ asset not created |
-| Water 4 | Flower (6× Water-3 petals in ring) | code | ❌ asset not created |
-| Fire 1 | `fire-lvl-1.png` julinaserrano_0..13 | 14 | ❌ asset not created |
-| Fire 2 | `fire-lvl-2-with-spread.png` pixil-frame-3_0..10 | 11 | ❌ asset not created |
-| Fire 3 | `fire-lvl-3.png` pixil-frame-6_0..3 | 4 | ❌ asset not created |
-| Fire 4 | `fire-lvl-4.png` wachin_0 + AOE | 1+code | ❌ asset not created |
-| Elec 1 | `electricity-lvl-1.png` pixil-frame-0_0 | 1 | ❌ asset not created |
-| Elec 2 | `electricity-lvl-2-with-spread.png` pixil-frame-4_0..13 | 14 | ❌ asset not created |
-| Elec 3 | `electricity-lvl-3.png` + spread (93 frames!) | 1+93 | ❌ asset not created |
-| Elec 4 | `electricity-lvl-4.png` wacho_0 + chain | 1+code | ❌ asset not created |
+1. **Fase 1: Capa de Datos y Sistema de Estadísticas del Jugador (Issue #5)**
+   - Crear `PlayerStats.cs`: Sistema de niveles y modificadores para HP, Velocidad, Daño y Cooldown Reduction.
+   - Actualizar `PlayerHealth.cs`: Escalar con maxHealth de PlayerStats y curar al mejorar vida.
+   - Actualizar `PlayerMovement.cs`: Escalar velocidad con la estadística de Speed.
+   - Actualizar `SpellCaster.cs`: Escalar castTime con Cooldown Reduction y daño con Damage Multiplier.
 
-SpellSetup.cs ✅ written — creates all the above when run from Tools menu.
+2. **Fase 2: Orientación de Personajes y Movimiento Retro (Issues #1 y #3)**
+   - Corregir orientación en `PlayerMovement.cs`:
+     - Natural = Izquierda (`flipX = false`).
+     - Movimiento izquierda (`movement.x < -0.01f`) -> `flipX = false`.
+     - Movimiento derecha (`movement.x > 0.01f`) -> `flipX = true`.
+   - Corregir orientación en `Enemy.cs`:
+     - Natural = Izquierda (`flipX = false`).
+     - Al moverse hacia la izquierda (`xDiff < 0`) -> `flipX = false`.
+     - Al moverse hacia la derecha (`xDiff > 0`) -> `flipX = true`.
+     - Reflejar `weaponChild` y su posición X según la orientación correcta.
+   - Optimizar `CharacterBob.cs` para un rebote elástico retro sin distorsionar interfaces hijas.
 
----
+3. **Fase 3: Reescalado y Efectos Fluidos de Hechizos (Issue #4)**
+   - Reescalar todos los prefabs de hechizos en `Assets/Prefabs/Spells/` de (1.0~2.5) a proporciones adecuadas retro (~0.35~0.5).
+   - Ajustar colisionadores circulares.
+   - `FireAoEProjectile.cs`: Escalar a tamaño balanceado (0.45f ~ 0.55f) y añadir efecto dinámico de pulsación y partículas de fuego.
+   - `ChainLightningProjectile.cs`: Añadir jitter eléctrico y chispas dinámicas.
+   - `WaterFlowerAttack.cs`: Orientar pétalos radialmente hacia afuera en un círculo perfecto.
 
-## Issue #5 — Wave System
+4. **Fase 4: Sistema Completo de Oleadas, Intermedio de 20s y Menú de Mejoras (Issue #5)**
+   - Desarrollar `StatsUpgradeUI.cs` / `SpellSelectionUI.cs`:
+     - Interfaz completa y responsiva (con soporte dual Canvas UI y fallback OnGUI garantizado al 100% de ejecución).
+     - Selección de hechizo inicial en oleada 0.
+     - Al terminar cada oleada:
+       - Cuenta regresiva de 20 segundos de recuperación.
+       - Botón "Ready / Comenzar Oleada" para saltar la espera si el jugador lo desea.
+       - Menú de estadísticas: HP, Speed, Damage, Cooldown Reduction.
+       - Menú de selección/mejora de hechizos (1 a 4).
+   - Actualizar `WaveManager.cs`:
+     - Fórmulas de oleadas progresivas.
+     - Oleada 5: Aparición garantizada del jefe Santa con sus invocaciones.
+     - Limpieza de enemigos muertos y detección precisa de victoria de oleada.
 
-**Game loop:**
-1. Game loads → WaveManager.Start() → EnterSpellSelection()
-2. If SpellSelectionUI present: shows panel, player picks spell, wave starts
-3. If SpellSelectionUI absent (fallback): auto-starts wave after 1 second
-4. Kill all enemies → 5s cooldown → back to step 2
-5. Wave N: `(2 + N×2)` elves, `floor(N/2)` magic, first Santa at wave 5
-6. Player dies → GameOverUI shows wave number
+5. **Fase 5: Cámara con Límites de Mapa (Issue #6)**
+   - Actualizar `CameraFollow.cs` con cálculo ortográfico dinámico de ancho y alto de pantalla (`orthographicSize * aspect`).
+   - Confinar la cámara al plano del mapa (`x: [-10, 10]`, `y: [-7.5, 7.5]`).
 
-**Status:**
-- WaveManager state machine ✅ written + null-safe fallback added
-- PlayerSpellInventory ✅ written
-- SpellSelectionUI ✅ written (needs GameSceneSetup to add to scene)
-- MainMenuUI.PlayGame() ✅ fixed (calls NameInputManager)
-- GameOverUI ✅ shows wave reached
+6. **Fase 6: Sistema de Audio y Música por Escena**
+   - Asignar `GameMusic.mp3` (`guid: 17172da21e6e983139cfeb8a5b2f8795`) en `Game.unity`.
+   - `SceneMusic.cs`: Carga de respaldo desde Resources/Audio para garantizar música correcta en cualquier situación.
+   - `AudioManager.cs`: Transición y corte de la música anterior al entrar en escena de juego.
 
-
-## Issue Status
-| # | Title | Status |
-|---|-------|--------|
-| 1 | Make elf enemies, Santa, and more | ✅ CLOSED (done) |
-| 2 | PR for issue #1 | ✅ MERGED |
-| 3 | Making character movement | 🟡 OPEN — needs animation |
-| 4 | Applying actual spells | 🟡 OPEN — needs full spell system |
-| 5 | Making the waves system | 🟡 OPEN — needs wave loop |
-
----
-
-## Issue #3 — Character Movement Animations
-
-**Requirement:** All characters hop/bounce while moving. Weapons animate on attack.
-- Enemies + player get a squash-stretch "hop" scale effect when moving.
-- Player attack uses `player-staff-with-animations.png` (11 frames).
-- Elf weapons swing via **code** (no spritesheet), Santa weapon uses spritesheet (already set up).
-
-**New scripts:**
-- `CharacterBob.cs` — scale-based squash-stretch bob (attached to root, drives itself from a `SetMoving(bool)` call)
-- `WeaponSwing.cs` — coroutine rotation swing for elf weapon children
-
-**Modified scripts:**
-- `Enemy.cs` — get CharacterBob ref; call `SetMoving`; call `weaponSwing.Swing()` on attack; call `WaveManager.EnemyDied()` + delay destroy on die
-- `PlayerMovement.cs` — get CharacterBob ref; call `SetMoving`
-
-**Editor script:**
-- `PlayerSetup.cs` (Tools > Setup Player) — creates player animation clips, builds PlayerAnimator controller, adds CharacterBob + Animator to player in Game scene
-
----
-
-## Issue #4 — Actual Spells
-
-**Sprite mapping:**
-| Spell | Asset | Frames |
-|-------|-------|--------|
-| Light | `light-sprite-sheet.png` (pixil-frame-1_0..2) | 3 |
-| Water 1 | `water-lvl-1.png` (water-lvl-1_0..5) | 6 |
-| Water 2 | `water-lvl-2-with-spread.png` (pixil-frame-2_0..20) | 21 |
-| Water 3 | `water-lvl-3.png` (pixil-frame-5_0) + `water-lvl-3-spread.png` (pixil-frame-9_0..26) | 1 + 27 |
-| Water 4 | Flower — 6× Water-3 sprite arranged around player | code |
-| Fire 1 | `fire-lvl-1.png` (julinaserrano_0..13) | 14 |
-| Fire 2 | `fire-lvl-2-with-spread.png` (pixil-frame-3_0..10) | 11 |
-| Fire 3 | `fire-lvl-3.png` (pixil-frame-6_0..3) | 4 |
-| Fire 4 | `fire-lvl-4.png` (wachin_0) — big slow ball, AOE on impact | 1+code |
-| Elec 1 | `electricity-lvl-1.png` (pixil-frame-0_0) | 1 |
-| Elec 2 | `electricity-lvl-2-with-spread.png` (pixil-frame-4_0..13) | 14 |
-| Elec 3 | `electricity-lvl-3.png` (pixil-frame-7_0) + `electricity-lvl-3-spread.png` (pixil-frame-8_0..92) | 1+93 |
-| Elec 4 | `electricity-lvl-4.png` (wacho_0) — chain lightning | 1+code |
-
-**Architecture:**
-- `ISpellBehavior` interface — `void Fire(Vector3 dir, SpellData data)` — implemented by Projectile.cs + special scripts
-- `SpreadImpact.cs` — plays impact animation + area damage (used by Water 3, Elec 3)
-- `WaterFlowerAttack.cs` — instantiates 6 petal projectiles in a ring around the player
-- `FireAoEProjectile.cs` — slow fireball; on hit spawns `AreaDamage` zone
-- `ChainLightningProjectile.cs` — hits first enemy, jumps to nearest N enemies
-
-**Data:**
-- `ElementType.cs` — enum {Water, Fire, Electricity, Light}
-- `SpellData.cs` — add `element` + `level` fields
-- `SpellDatabase.cs` — ScriptableObject; holds all SpellData arrays; `GetSpell(element, level)` method
-
-**Editor script:**
-- `SpellSetup.cs` (Tools > Setup Spells) — creates all clips, controllers, prefabs, SO assets, and populates SpellDatabase
-
----
-
-## Issue #5 — Wave System
-
-**Game loop:**
-1. Game.unity loads → WaveManager starts in Idle
-2. SpellSelectionUI shows ("pick your starting spell")
-3. Player picks element → PlayerSpellInventory records it, SpellCaster is updated
-4. Wave 1 spawns: 2 melee elves + 2 magic elves
-5. Kill all enemies → 5s cooldown → SpellSelectionUI again
-6. Same element = upgrade level (+1, max 4). Different = new spell at lvl 1.
-7. Each wave: +2 elves, more magic ratio, Santa starts at wave 5
-8. Player dies → GameOverUI shows wave number reached
-
-**Procedural wave formula:**
-- Wave N: `(2 + N*2)` total elves, `floor(N/2)` are magic type
-- Santas: `max(0, floor((N-4)/5))` per wave (first at wave 5)
-
-**New scripts:**
-- `PlayerSpellInventory.cs` — singleton on Player; `Dictionary<ElementType, int> levels`; `SelectElement(elem)` returns new level
-- `SpellSelectionUI.cs` — 4 element buttons + wave label; calls inventory + updates SpellCaster + calls `WaveManager.OnSpellSelected()`
-- `WaveManager.cs` (full rewrite) — state machine: Idle → SpellSelection → WaveActive → WaveCooldown → loop
-
-**Modified scripts:**
-- `MainMenuUI.cs` — fix `PlayGame()` to call `NameInputManager.ShowNameInput()`
-- `GameOverUI.cs` — show current wave number on death
-
----
-
-## Execution Order
-
-1. Data layer (ElementType, SpellData, SpellDatabase)
-2. CharacterBob + WeaponSwing
-3. Update Enemy.cs + PlayerMovement.cs
-4. Spell behavior scripts (ISpellBehavior, SpreadImpact, WaterFlower, FireAoE, ChainLightning)
-5. SpellCaster overhaul
-6. PlayerSpellInventory + WaveManager overhaul
-7. SpellSelectionUI + UI fixes (MainMenu, GameOver)
-8. Editor scripts (PlayerSetup, SpellSetup)
-9. Run setup scripts → verify in Unity
+7. **Fase 7: Cableado Automático Total en Escenas y Prefabs (Cumplimiento Paso 4)**
+   - Modificar `Game.unity` para integrar `WaveManager`, `GameBootstrap`, `CameraFollow` configurado y eliminar elfos manuales huérfanos.
+   - Crear `GameBootstrap.cs` auto-ejecutable con `[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]` para que el juego funcione sin requerir ninguna acción en el Editor de Unity.
+   - Validar compilación limpia en Unity Editor.

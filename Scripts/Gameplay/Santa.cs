@@ -30,14 +30,20 @@ public class Santa : Enemy
 
     void SpawnElves()
     {
+        // Fallback prefabs from WaveManager if not set directly
+        var wm = WaveManager.Instance;
+        var melee = elfMeleePrefab != null ? elfMeleePrefab : (wm != null ? wm.elfMeleePrefab : null);
+        var magic = elfMagicPrefab != null ? elfMagicPrefab : (wm != null ? wm.elfMagicPrefab : null);
+
         for (int i = 0; i < 3; i++)
         {
-            GameObject prefab = Random.value > 0.5f ? elfMagicPrefab : elfMeleePrefab;
+            GameObject prefab = Random.value > 0.5f ? magic : melee;
             if (prefab == null) continue;
 
             float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
             Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * elfSpawnRadius;
             Instantiate(prefab, transform.position + offset, Quaternion.identity);
+            WaveManager.Instance?.OnEnemySpawned();
         }
     }
 }

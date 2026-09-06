@@ -119,12 +119,15 @@ public class Enemy : MonoBehaviour
         if (newFacing == facing) return;
         facing = newFacing;
 
-        bodySR.flipX = facing == -1;
+        // Native sprite (mediapila_0 / chacarera_0) faces LEFT:
+        // Moving left (facing == -1) => flipX = false (looks left)
+        // Moving right (facing == 1) => flipX = true (looks right)
+        bodySR.flipX = (facing == 1);
 
         if (weaponChild != null)
         {
             SpriteRenderer wsr = weaponChild.GetComponent<SpriteRenderer>();
-            if (wsr != null) wsr.flipX = facing == -1;
+            if (wsr != null) wsr.flipX = (facing == 1);
             // Mirror weapon to the correct side
             Vector3 pos = weaponChild.localPosition;
             pos.x = Mathf.Abs(weaponOffset.x) * facing;

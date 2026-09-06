@@ -10,6 +10,7 @@ public class SpellCaster : MonoBehaviour
     private float castProgress;
     private bool isCasting;
     private Animator playerAnimator;
+    private PlayerStats stats;
 
     // Simple code-based cast bar drawn above the player
     private Transform castBarFill;
@@ -17,6 +18,7 @@ public class SpellCaster : MonoBehaviour
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
+        stats = GetComponent<PlayerStats>() ?? gameObject.AddComponent<PlayerStats>();
         if (spellDatabase == null)
             spellDatabase = Resources.Load<SpellDatabase>("SpellDatabase");
         BuildCastBar();
@@ -25,10 +27,14 @@ public class SpellCaster : MonoBehaviour
     // Called by SpellSelectionUI after the player picks an element
     public void SetSpellByElement(ElementType element, int level)
     {
+        if (spellDatabase == null)
+            spellDatabase = Resources.Load<SpellDatabase>("SpellDatabase");
         if (spellDatabase == null) return;
+
         currentSpell = spellDatabase.GetSpell(element, level);
         castProgress = 0f;
         isCasting = false;
+        UpdateCastBarVisual(0f);
     }
 
     void Update()
@@ -39,12 +45,22 @@ public class SpellCaster : MonoBehaviour
             spell = spellDatabase.GetSpell(ElementType.Water, 1);
         if (spell == null || spell.projectilePrefab == null) return;
 
-        bool pressing = Mouse.current != null && Mouse.current.leftButton.isPressed;
+        bool pressing = false;
+        if (Mouse.current != null)
+            pressing = Mouse.current.leftButton.isPressed;
+        if (!pressing)
+        {
+            try { pressing = Input.GetMouseButton(0); } catch { }
+        }
 
         if (pressing)
         {
             if (!isCasting) isCasting = true;
-            castProgress += Time.deltaTime / spell.castTime;
+
+            float cdMultiplier = stats != null ? stats.GetCooldownMultiplier() : 1f;
+            float effectiveCastTime = Mathf.Max(0.1f, spell.castTime * cdMultiplier);
+
+            castProgress += Time.deltaTime / effectiveCastTime;
             UpdateCastBarVisual(Mathf.Clamp01(castProgress));
 
             if (castProgress >= 1f)
@@ -70,14 +86,30 @@ public class SpellCaster : MonoBehaviour
     {
         if (Camera.main == null) return;
 
-        Vector2 mouseScreen = Mouse.current.position.ReadValue();
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreen.x, mouseScreen.y, 0f));
+        Vector3 mouseScreen = Vector3.zero;
+        if (Mouse.current != null)
+        {
+            Vector2 m = Mouse.current.position.ReadValue();
+            mouseScreen = new Vector3(m.x, m.y, 0f);
+        }
+        else
+        {
+            try { mouseScreen = Input.mousePosition; } catch { }
+        }
+
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
         mouseWorld.z = transform.position.z;
         Vector3 dir = (mouseWorld - transform.position).normalized;
+        if (dir.sqrMagnitude < 0.001f) dir = Vector3.right;
 
-        var proj = Instantiate(spell.projectilePrefab, transform.position, Quaternion.identity);
+        // Clone SpellData so damage multiplier applies to this cast without modifying asset permanently
+        var runtimeSpell = ScriptableObject.Instantiate(spell);
+        if (stats != null)
+            runtimeSpell.damage *= stats.GetDamageMultiplier();
+
+        var proj = Instantiate(runtimeSpell.projectilePrefab, transform.position, Quaternion.identity);
         var behavior = proj.GetComponent<ISpellBehavior>();
-        behavior?.Fire(dir, spell);
+        behavior?.Fire(dir, runtimeSpell);
 
         if (playerAnimator != null)
             playerAnimator.SetTrigger("Attack");
@@ -87,6 +119,14 @@ public class SpellCaster : MonoBehaviour
 
     void BuildCastBar()
     {
+        var existing = transform.Find("CastBarBG");
+        if (existing != null)
+        {
+            var f = existing.Find("CastBarFill");
+            if (f != null) castBarFill = f;
+            return;
+        }
+
         var barBG = new GameObject("CastBarBG");
         barBG.transform.SetParent(transform, false);
         barBG.transform.localPosition = new Vector3(0f, 0.75f, 0f);
@@ -125,6 +165,6 @@ public class SpellCaster : MonoBehaviour
         var tex = new Texture2D(1, 1);
         tex.SetPixel(0, 0, Color.white);
         tex.Apply();
-        return Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
+        return Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f), 1f);
     }
 }
