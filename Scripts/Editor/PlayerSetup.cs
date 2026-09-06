@@ -152,8 +152,16 @@ public static class PlayerSetup
     static AnimatorState AddOrUpdateState(AnimatorStateMachine sm, string name, Motion motion)
     {
         foreach (var cs in sm.states)
-            if (cs.state.name == name) { cs.state.motion = motion; return cs.state; }
-        var s = sm.AddState(name); s.motion = motion; return s;
+        {
+            if (cs.state.name != name) continue;
+            cs.state.motion = motion;
+            cs.state.writeDefaultValues = false;
+            return cs.state;
+        }
+        var s = sm.AddState(name);
+        s.motion = motion;
+        s.writeDefaultValues = false;
+        return s;
     }
 
     static void AddAnyTransitionIfMissing(AnimatorStateMachine sm, AnimatorState to,

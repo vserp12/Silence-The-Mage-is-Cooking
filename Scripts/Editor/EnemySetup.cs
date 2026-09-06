@@ -290,8 +290,15 @@ public static class EnemySetup
     static AnimatorState AddOrUpdateState(AnimatorStateMachine sm, string stateName, Motion motion)
     {
         foreach (var cs in sm.states)
-            if (cs.state.name == stateName) { cs.state.motion = motion; return cs.state; }
-        return sm.AddState(stateName, motion);
+        {
+            if (cs.state.name != stateName) continue;
+            cs.state.motion = motion;
+            cs.state.writeDefaultValues = false;
+            return cs.state;
+        }
+        var s = sm.AddState(stateName, motion);
+        s.writeDefaultValues = false;
+        return s;
     }
 
     static void AddTransitionIfMissing(AnimatorState from, AnimatorState to,

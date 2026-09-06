@@ -835,6 +835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpellCaster
   spellDatabase: {fileID: 11400000, guid: d0c39ee8d3ecb5028a1026d4246ec522, type: 2}
+  fallbackSpell: {fileID: 0}
 --- !u!114 &636357505
 MonoBehaviour:
   m_ObjectHideFlags: 0

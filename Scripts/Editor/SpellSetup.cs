@@ -309,6 +309,12 @@ public static class SpellSetup
         db.lightSpell        = light;
         EditorUtility.SetDirty(db);
 
+        // Also save to Resources so SpellCaster can load it at runtime without inspector wiring
+        EnsureFolder("Assets/Resources");
+        const string resPath = "Assets/Resources/SpellDatabase.asset";
+        if (AssetDatabase.LoadAssetAtPath<SpellDatabase>(resPath) == null)
+            AssetDatabase.CopyAsset(path, resPath);
+
         // Wire SpellDatabase into SpellCaster in the scene
         var casters = Object.FindObjectsByType<SpellCaster>(FindObjectsSortMode.None);
         foreach (var c in casters)

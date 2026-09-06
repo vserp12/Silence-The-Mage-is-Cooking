@@ -4,6 +4,46 @@ using UnityEngine;
 
 public enum WaveState { Idle, SpellSelection, SpawningWave, WaveActive, WaveCooldown }
 
+// ── Editor-only: auto-wires WaveManager + SpellCaster every time Play is pressed ──
+#if UNITY_EDITOR
+[UnityEditor.InitializeOnLoadMethod]
+static class WaveManagerPlayHook
+{
+    static WaveManagerPlayHook()
+    {
+        UnityEditor.EditorApplication.playModeStateChanged += OnPlayModeChange;
+    }
+
+    static void OnPlayModeChange(UnityEditor.PlayModeStateChange state)
+    {
+        if (state != UnityEditor.PlayModeStateChange.ExitingEditMode) return;
+
+        var wm = Object.FindFirstObjectByType<WaveManager>();
+        if (wm != null)
+        {
+            Wire(ref wm.elfMeleePrefab, "Assets/Prefabs/Enemies/ElfMelee.prefab");
+            Wire(ref wm.elfMagicPrefab, "Assets/Prefabs/Enemies/ElfMagic.prefab");
+            Wire(ref wm.santaPrefab,    "Assets/Prefabs/Enemies/Santa.prefab");
+        }
+
+        var sc = Object.FindFirstObjectByType<SpellCaster>();
+        if (sc != null && sc.spellDatabase == null)
+        {
+            var db = UnityEditor.AssetDatabase.LoadAssetAtPath<SpellDatabase>(
+                "Assets/ScriptableObjects/SpellDatabase.asset");
+            if (db != null) sc.spellDatabase = db;
+        }
+    }
+
+    static void Wire(ref GameObject field, string path)
+    {
+        if (field != null) return;
+        field = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
+    }
+}
+#endif
+// ──────────────────────────────────────────────────────────────────────────────
+
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance;
@@ -90,17 +130,21 @@ public class WaveManager : MonoBehaviour
     {
         state = WaveState.SpellSelection;
         if (spellSelectionUI != null)
+        {
             spellSelectionUI.Show(currentWave);
+        }
         else
-            StartCoroutine(AutoStart());
-    }
-
-    // Fallback: if no SpellSelectionUI is in the scene, start the wave automatically
-    IEnumerator AutoStart()
-    {
-        yield return new WaitForSeconds(1f);
-        if (state == WaveState.SpellSelection)
-            OnSpellSelected();
+        {
+            // Create an OnGUI-based selection that needs no scene setup
+            var rss = GetComponent<RuntimeSpellSelection>() ?? gameObject.AddComponent<RuntimeSpellSelection>();
+            rss.Show(currentWave, elem =>
+            {
+                rss.Hide();
+                int lvl = PlayerSpellInventory.Instance?.SelectElement(elem) ?? 1;
+                FindObjectOfType<SpellCaster>()?.SetSpellByElement(elem, lvl);
+                OnSpellSelected();
+            });
+        }
     }
 
     IEnumerator RunWave()

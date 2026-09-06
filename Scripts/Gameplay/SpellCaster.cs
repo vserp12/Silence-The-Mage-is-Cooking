@@ -17,6 +17,8 @@ public class SpellCaster : MonoBehaviour
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
+        if (spellDatabase == null)
+            spellDatabase = Resources.Load<SpellDatabase>("SpellDatabase");
         BuildCastBar();
     }
 
