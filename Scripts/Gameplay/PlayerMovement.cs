@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     private SpriteRenderer sr;
+    private CharacterBob charBob;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        charBob = GetComponent<CharacterBob>();
     }
 
     void Update()
@@ -26,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
             if (movement.x > 0.01f) sr.flipX = false;
             else if (movement.x < -0.01f) sr.flipX = true;
         }
+
+        charBob?.SetMoving(movement.sqrMagnitude > 0.01f);
     }
 
     void FixedUpdate()

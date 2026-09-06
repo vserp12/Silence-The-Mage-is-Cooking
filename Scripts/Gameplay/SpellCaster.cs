@@ -3,80 +3,122 @@ using UnityEngine.InputSystem;
 
 public class SpellCaster : MonoBehaviour
 {
-    public SpellData currentSpell; // Acá asignás el hechizo desde el Inspector
-    
-    private float castProgress = 0f;
-    private bool isCasting = false;
-    private Transform castBar;
+    public SpellDatabase spellDatabase;
+
+    private SpellData currentSpell;
+    private float castProgress;
+    private bool isCasting;
+    private Animator playerAnimator;
+
+    // Simple code-based cast bar drawn above the player
+    private Transform castBarFill;
 
     void Start()
     {
-        // Crear una barra de casteo simple (un rectángulo encima del jugador)
-        GameObject barObj = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        barObj.transform.SetParent(transform);
-        barObj.transform.localPosition = new Vector3(0, 1f, 0); // Un poco arriba
-        barObj.transform.localScale = new Vector3(1f, 0.1f, 1f);
-        Destroy(barObj.GetComponent<Collider>()); // Quitar el collider del quad
-        
-        Renderer barRenderer = barObj.GetComponent<Renderer>();
-        barRenderer.material.color = Color.gray;
-        
-        castBar = barObj.transform;
-        castBar.localScale = new Vector3(0, 0.1f, 1f); // Empieza vacía
+        playerAnimator = GetComponent<Animator>();
+        BuildCastBar();
+    }
+
+    // Called by SpellSelectionUI after the player picks an element
+    public void SetSpellByElement(ElementType element, int level)
+    {
+        if (spellDatabase == null) return;
+        currentSpell = spellDatabase.GetSpell(element, level);
+        castProgress = 0f;
+        isCasting = false;
     }
 
     void Update()
     {
-        // Mantener click izquierdo para castear
-        if (Mouse.current.leftButton.isPressed)
+        if (currentSpell == null || currentSpell.projectilePrefab == null) return;
+        if (WaveManager.Instance == null || WaveManager.Instance.State != WaveState.WaveActive) return;
+
+        bool pressing = Mouse.current != null && Mouse.current.leftButton.isPressed;
+
+        if (pressing)
         {
             if (!isCasting) isCasting = true;
-            
             castProgress += Time.deltaTime / currentSpell.castTime;
-            
-            // Actualizar barra visual
-            castBar.localScale = new Vector3(Mathf.Clamp01(castProgress), 0.1f, 1f);
-            
-            // Si completó el casteo
+            UpdateCastBarVisual(Mathf.Clamp01(castProgress));
+
             if (castProgress >= 1f)
             {
                 CastSpell();
                 castProgress = 0f;
                 isCasting = false;
+                UpdateCastBarVisual(0f);
             }
         }
         else
         {
-            // Si soltó el click, cancelar
             if (isCasting)
             {
                 castProgress = 0f;
                 isCasting = false;
-                castBar.localScale = new Vector3(0, 0.1f, 1f);
+                UpdateCastBarVisual(0f);
             }
         }
     }
 
     void CastSpell()
     {
-        if (currentSpell == null || currentSpell.projectilePrefab == null) return;
+        if (Camera.main == null) return;
 
-        // Obtener la posición del cursor en el mundo
-        if (Camera.main != null)
-        {
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint((Vector3)Mouse.current.position.ReadValue());
-            mouseWorldPos.z = transform.position.z;
+        Vector2 mouseScreen = Mouse.current.position.ReadValue();
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreen.x, mouseScreen.y, 0f));
+        mouseWorld.z = transform.position.z;
+        Vector3 dir = (mouseWorld - transform.position).normalized;
 
-            // Calcular dirección hacia el cursor
-            Vector3 dir = (mouseWorldPos - transform.position).normalized;
+        var proj = Instantiate(currentSpell.projectilePrefab, transform.position, Quaternion.identity);
+        var behavior = proj.GetComponent<ISpellBehavior>();
+        behavior?.Fire(dir, currentSpell);
 
-            // Crear proyectil
-            GameObject proj = Instantiate(currentSpell.projectilePrefab, transform.position, Quaternion.identity);
-            Projectile p = proj.GetComponent<Projectile>();
-            if (p != null)
-            {
-                p.Setup(dir, currentSpell.projectileSpeed, currentSpell.damage, currentSpell.projectileVisuals);
-            }
-        }
+        if (playerAnimator != null)
+            playerAnimator.SetTrigger("Attack");
+    }
+
+    // ── Cast-bar visual built entirely in code ─────────────────────────────
+
+    void BuildCastBar()
+    {
+        var barBG = new GameObject("CastBarBG");
+        barBG.transform.SetParent(transform, false);
+        barBG.transform.localPosition = new Vector3(0f, 0.75f, 0f);
+
+        var bgSR = barBG.AddComponent<SpriteRenderer>();
+        bgSR.sprite = CreateFlatSprite();
+        bgSR.color = new Color(0.1f, 0.1f, 0.1f, 0.7f);
+        bgSR.sortingOrder = 10;
+        barBG.transform.localScale = new Vector3(1f, 0.12f, 1f);
+
+        var fill = new GameObject("CastBarFill");
+        fill.transform.SetParent(barBG.transform, false);
+        fill.transform.localPosition = new Vector3(-0.5f, 0f, -0.01f);
+
+        var fillSR = fill.AddComponent<SpriteRenderer>();
+        fillSR.sprite = bgSR.sprite;
+        fillSR.color = new Color(0.2f, 0.7f, 1f, 1f);
+        fillSR.sortingOrder = 11;
+        fill.transform.localScale = new Vector3(0f, 1f, 1f);
+        castBarFill = fill.transform;
+    }
+
+    void UpdateCastBarVisual(float t)
+    {
+        if (castBarFill == null) return;
+        var s = castBarFill.localScale;
+        s.x = t;
+        castBarFill.localScale = s;
+        var p = castBarFill.localPosition;
+        p.x = (t - 1f) * 0.5f;
+        castBarFill.localPosition = p;
+    }
+
+    static Sprite CreateFlatSprite()
+    {
+        var tex = new Texture2D(1, 1);
+        tex.SetPixel(0, 0, Color.white);
+        tex.Apply();
+        return Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
     }
 }

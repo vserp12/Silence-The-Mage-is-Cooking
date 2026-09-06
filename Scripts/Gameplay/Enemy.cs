@@ -33,7 +33,9 @@ public class Enemy : MonoBehaviour
     protected Animator weaponAnimator;
     protected SpriteRenderer bodySR;
     protected Transform weaponChild;
-    private int facing = 0; // 0 = unset, 1 = right, -1 = left
+    private int facing = 0;
+    private CharacterBob charBob;
+    private WeaponSwing weaponSwing;
 
     void Start()
     {
@@ -71,11 +73,14 @@ public class Enemy : MonoBehaviour
 
         UpdateHealthBar();
 
+        charBob = GetComponent<CharacterBob>();
+        if (weaponChild != null) weaponSwing = weaponChild.GetComponent<WeaponSwing>();
+
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             player = playerObj.transform;
-            UpdateFacing(); // set initial facing immediately
+            UpdateFacing();
         }
     }
 
@@ -96,6 +101,7 @@ public class Enemy : MonoBehaviour
         }
 
         UpdateFacing();
+        charBob?.SetMoving(isMoving);
 
         if (animator != null)
             animator.SetBool("isMoving", isMoving);
@@ -151,6 +157,8 @@ public class Enemy : MonoBehaviour
         if (animator != null)
             animator.SetTrigger("Attack");
 
+        weaponSwing?.Swing();
+
         if (attackType == EnemyAttackType.Melee)
         {
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
@@ -175,6 +183,18 @@ public class Enemy : MonoBehaviour
     {
         if (animator != null)
             animator.SetBool("isDead", true);
+
+        // Disable collider so the player's projectiles stop hitting a dead enemy
+        var col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = false;
+
+        WaveManager.Instance?.EnemyDied();
+        StartCoroutine(DisableAfterDelay(1f));
+    }
+
+    private System.Collections.IEnumerator DisableAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         gameObject.SetActive(false);
     }
 }

@@ -15,9 +15,9 @@ public static class EnemySetup
         EnsureFolders();
 
         // ── Load sprites ──────────────────────────────────────────────────────
-        var elfSprites = LoadSprites("Assets/Sprites/mediapila.png");
-        var santaSprites = LoadSprites("Assets/Sprites/chacarera.png");
-        var summonSprites = LoadSprites("Assets/Sprites/cuartapila.png");
+        var elfSprites = LoadSprites("Assets/Sprites/elfs-and-weapons.png");
+        var santaSprites = LoadSprites("Assets/Sprites/Santa-and-staff.png");
+        var summonSprites = LoadSprites("Assets/Sprites/santa-spawn-attack.png");
         var projSprites = LoadSprites("Assets/Sprites/enemy_atacks.png");
 
         Sprite elfBody0 = Get(elfSprites, "mediapila_0");

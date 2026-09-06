@@ -17,7 +17,12 @@ public class MainMenuUI : MonoBehaviour
 
     public void PlayGame()
     {
-        return;
+        // Show the name-input panel which then loads the Game scene
+        NameInputManager nim = FindObjectOfType<NameInputManager>();
+        if (nim != null)
+            nim.ShowNameInput();
+        else
+            SceneManager.LoadScene("Game");
     }
 
     public void QuitGame()

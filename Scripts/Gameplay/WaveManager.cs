@@ -1,55 +1,132 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
+public enum WaveState { Idle, SpellSelection, SpawningWave, WaveActive, WaveCooldown }
 
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance;
 
+    [Header("Enemy Prefabs")]
     public GameObject enemyPrefab;
     public GameObject elfMeleePrefab;
     public GameObject elfMagicPrefab;
     public GameObject santaPrefab;
 
+    [Header("Spawn Settings")]
     public Transform player;
-    public float spawnRadius = 8f; // A qué distancia del jugador aparecen
-    public float timeBetweenWaves = 3f; // Tiempo entre oleadas
+    public float spawnRadius = 8f;
+    public float spawnDelay = 0.4f;     // seconds between each individual spawn
+
+    [Header("Wave Timing")]
+    public float cooldownDuration = 5f;
+
+    [Header("UI")]
+    public SpellSelectionUI spellSelectionUI;
 
     private int currentWave = 0;
     private int enemiesAlive = 0;
-    private bool waveInProgress = false;
+    private WaveState state = WaveState.Idle;
+
+    public WaveState State => state;
+    public int CurrentWave => currentWave;
 
     void Awake()
     {
         Instance = this;
-
         if (player == null)
         {
-            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            var p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) player = p.transform;
         }
     }
 
-    // Crea un enemigo con el prefab dado en un punto aleatorio alrededor del jugador
-    public void SpawnEnemy(GameObject prefab)
+    void Start()
     {
-        if (prefab == null) { Debug.LogWarning("WaveManager: prefab no asignado"); return; }
-        if (player == null) { Debug.LogWarning("WaveManager: player no encontrado"); return; }
-
-        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * spawnRadius;
-        Instantiate(prefab, player.position + offset, Quaternion.identity);
+        EnterSpellSelection();
     }
 
-    // Mantiene compatibilidad con el prefab genérico
-    public void SpawnEnemy() => SpawnEnemy(enemyPrefab);
+    // ── Public API ─────────────────────────────────────────────────────────
 
-    // SOLO PARA PROBAR: T = enemigo genérico, E = elfo melee, M = elfo mágico, S = Santa
-    void Update()
+    public void SpawnEnemy(GameObject prefab)
     {
-        if (Keyboard.current == null) return;
-        if (Keyboard.current.tKey.wasPressedThisFrame) SpawnEnemy(enemyPrefab);
-        if (Keyboard.current.eKey.wasPressedThisFrame) SpawnEnemy(elfMeleePrefab);
-        if (Keyboard.current.mKey.wasPressedThisFrame) SpawnEnemy(elfMagicPrefab);
-        if (Keyboard.current.sKey.wasPressedThisFrame) SpawnEnemy(santaPrefab);
+        if (prefab == null || player == null) return;
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+        Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * spawnRadius;
+        Instantiate(prefab, player.position + offset, Quaternion.identity);
+        enemiesAlive++;
+    }
+
+    // Called by Enemy when it dies
+    public void EnemyDied()
+    {
+        enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
+        if (state == WaveState.WaveActive && enemiesAlive == 0)
+            StartCoroutine(DelayedWaveClear());
+    }
+
+    // Called by SpellSelectionUI once the player confirms a spell choice
+    public void OnSpellSelected()
+    {
+        if (spellSelectionUI != null) spellSelectionUI.Hide();
+        StartCoroutine(RunWave());
+    }
+
+    // ── State Machine ──────────────────────────────────────────────────────
+
+    void EnterSpellSelection()
+    {
+        state = WaveState.SpellSelection;
+        if (spellSelectionUI != null)
+            spellSelectionUI.Show(currentWave);
+    }
+
+    IEnumerator RunWave()
+    {
+        currentWave++;
+        state = WaveState.SpawningWave;
+        enemiesAlive = 0;
+
+        foreach (var (prefab, count) in BuildWaveSpawns(currentWave))
+        {
+            for (int i = 0; i < count; i++)
+            {
+                SpawnEnemy(prefab);
+                yield return new WaitForSeconds(spawnDelay);
+            }
+        }
+
+        state = WaveState.WaveActive;
+        // Edge case: if all enemies somehow died during spawning
+        if (enemiesAlive == 0)
+            StartCoroutine(DelayedWaveClear());
+    }
+
+    IEnumerator DelayedWaveClear()
+    {
+        yield return new WaitForSeconds(1.2f); // let death animations play
+        if (enemiesAlive > 0) yield break;     // more enemies spawned meanwhile
+        state = WaveState.WaveCooldown;
+        yield return new WaitForSeconds(cooldownDuration);
+        EnterSpellSelection();
+    }
+
+    // ── Procedural wave composition ────────────────────────────────────────
+
+    List<(GameObject prefab, int count)> BuildWaveSpawns(int wave)
+    {
+        var list = new List<(GameObject, int)>();
+
+        int totalElves = 2 + wave * 2;
+        int magicCount = wave / 2;
+        int meleeCount = totalElves - magicCount;
+        int santaCount = Mathf.Max(0, (wave - 4) / 5); // first Santa at wave 5
+
+        if (elfMeleePrefab != null && meleeCount > 0) list.Add((elfMeleePrefab, meleeCount));
+        if (elfMagicPrefab != null && magicCount > 0)  list.Add((elfMagicPrefab, magicCount));
+        if (santaPrefab != null && santaCount > 0)     list.Add((santaPrefab, santaCount));
+
+        return list;
     }
 }
