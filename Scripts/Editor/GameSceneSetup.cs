@@ -71,8 +71,13 @@ public static class GameSceneSetup
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"[GameSceneSetup] FAILED at: {e.Message}\n{e.StackTrace}");
+            EditorUtility.DisplayDialog("GameSceneSetup FAILED",
+                $"Error at:\n{e.Message}\n\nSee Console for full stack trace.", "OK");
+            Debug.LogError($"[GameSceneSetup] FAILED: {e.Message}\n{e.StackTrace}");
         }
+
+        EditorUtility.DisplayDialog("GameSceneSetup",
+            "Done! Press Ctrl+S to save the scene.", "OK");
     }
 
     // ── UI builders ───────────────────────────────────────────────────────
