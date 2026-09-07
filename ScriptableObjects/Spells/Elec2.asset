@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b0f14e4eda3c2e4884bbb50d870289, type: 3}
+  m_Name: Elec2
+  m_EditorClassIdentifier: Assembly-CSharp::SpellData
+  spellName: Electricity Level 2
+  element: 2
+  level: 2
+  castTime: 0.7
+  damage: 25
+  projectileSpeed: 16
+  projectileVisuals: {fileID: 11400000, guid: 0abe0d2dffedca54fbba1adca5ceb93c, type: 2}
+  projectilePrefab: {fileID: 2544861965972088851, guid: bde2e43f6a4f429b1ba46e779b2d4488, type: 3}
+  impactPrefab: {fileID: 0}
+  impactRadius: 0

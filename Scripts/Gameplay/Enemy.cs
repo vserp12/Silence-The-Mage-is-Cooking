@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
 
     public Sprite bodySprite;
     public Sprite weaponSprite;
+    public Color bodyColor = Color.white;
+    public Vector2 weaponOffset = new Vector2(0.4f, -0.2f);
+    public float weaponScale = 1f;
 
     public Transform healthBarFill;
     public GameObject healthBarContainer;
@@ -26,35 +29,58 @@ public class Enemy : MonoBehaviour
 
     protected Transform player;
     protected float lastAttackTime = 0f;
+    protected Animator animator;
+    protected Animator weaponAnimator;
+    protected SpriteRenderer bodySR;
+    protected Transform weaponChild;
+    private int facing = 0;
+    private CharacterBob charBob;
+    private WeaponSwing weaponSwing;
 
     void Start()
     {
         currentHealth = maxHealth;
 
-        SpriteRenderer bodySR = GetComponent<SpriteRenderer>();
-        if (bodySR != null && bodySprite != null) bodySR.sprite = bodySprite;
+        animator = GetComponent<Animator>();
+        bodySR = GetComponent<SpriteRenderer>();
 
-        if (weaponSprite != null)
+        if (bodySR != null)
+        {
+            bodySR.color = bodyColor;
+            if (bodySprite != null) bodySR.sprite = bodySprite;
+        }
+
+        Transform existingWeapon = transform.Find("Weapon");
+        if (existingWeapon != null)
+        {
+            weaponChild = existingWeapon;
+            weaponAnimator = existingWeapon.GetComponent<Animator>();
+        }
+        else if (weaponSprite != null)
         {
             GameObject weaponObj = new GameObject("Weapon");
             weaponObj.transform.SetParent(transform);
-            weaponObj.transform.localPosition = Vector3.zero;
+            weaponObj.transform.localPosition = new Vector3(Mathf.Abs(weaponOffset.x), weaponOffset.y);
+            weaponObj.transform.localScale = Vector3.one * weaponScale;
             SpriteRenderer weaponSR = weaponObj.AddComponent<SpriteRenderer>();
             weaponSR.sprite = weaponSprite;
-            weaponSR.sortingOrder = (bodySR != null ? bodySR.sortingOrder : 0) + 1;
+            weaponSR.sortingOrder = (bodySR != null ? bodySR.sortingOrder : 0);
+            weaponChild = weaponObj.transform;
         }
 
         if (healthBarFill != null)
-        {
             originalBarScale = healthBarFill.localScale;
-        }
 
         UpdateHealthBar();
+
+        charBob = GetComponent<CharacterBob>();
+        if (weaponChild != null) weaponSwing = weaponChild.GetComponent<WeaponSwing>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             player = playerObj.transform;
+            UpdateFacing();
         }
     }
 
@@ -63,9 +89,9 @@ public class Enemy : MonoBehaviour
         if (player == null) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        bool isMoving = attackType == EnemyAttackType.Melee || distanceToPlayer > attackRange;
 
-        // Ranged enemies stop when in range; melee always close in
-        if (attackType == EnemyAttackType.Melee || distanceToPlayer > attackRange)
+        if (isMoving)
         {
             transform.position = Vector2.MoveTowards(
                 transform.position,
@@ -74,9 +100,38 @@ public class Enemy : MonoBehaviour
             );
         }
 
+        UpdateFacing();
+        charBob?.SetMoving(isMoving);
+
+        if (animator != null)
+            animator.SetBool("isMoving", isMoving);
+
         if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
-        {
             Attack();
+    }
+
+    void UpdateFacing()
+    {
+        if (player == null || bodySR == null) return;
+        float xDiff = player.position.x - transform.position.x;
+        if (Mathf.Abs(xDiff) < 0.15f) return; // deadzone prevents oscillation when player is directly in front
+        int newFacing = xDiff < 0f ? -1 : 1;
+        if (newFacing == facing) return;
+        facing = newFacing;
+
+        // Native sprite (mediapila_0 / chacarera_0) faces LEFT:
+        // Moving left (facing == -1) => flipX = false (looks left)
+        // Moving right (facing == 1) => flipX = true (looks right)
+        bodySR.flipX = (facing == 1);
+
+        if (weaponChild != null)
+        {
+            SpriteRenderer wsr = weaponChild.GetComponent<SpriteRenderer>();
+            if (wsr != null) wsr.flipX = (facing == 1);
+            // Mirror weapon to the correct side
+            Vector3 pos = weaponChild.localPosition;
+            pos.x = Mathf.Abs(weaponOffset.x) * facing;
+            weaponChild.localPosition = pos;
         }
     }
 
@@ -84,11 +139,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= amount;
         UpdateHealthBar();
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        if (currentHealth <= 0) Die();
     }
 
     void UpdateHealthBar()
@@ -107,6 +158,11 @@ public class Enemy : MonoBehaviour
     protected virtual void Attack()
     {
         lastAttackTime = Time.time;
+
+        if (animator != null)
+            animator.SetTrigger("Attack");
+
+        weaponSwing?.Swing();
 
         if (attackType == EnemyAttackType.Melee)
         {
@@ -130,6 +186,20 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        if (animator != null)
+            animator.SetBool("isDead", true);
+
+        // Disable collider so the player's projectiles stop hitting a dead enemy
+        var col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = false;
+
+        WaveManager.Instance?.EnemyDied();
+        StartCoroutine(DisableAfterDelay(1f));
+    }
+
+    private System.Collections.IEnumerator DisableAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         gameObject.SetActive(false);
     }
 }

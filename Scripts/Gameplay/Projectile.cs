@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, ISpellBehavior
 {
     private Vector3 direction;
     private float speed;
@@ -44,16 +44,20 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    // Detectar colisión con enemigos
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Buscamos si lo que tocamos tiene el script Enemy
         Enemy enemy = other.GetComponent<Enemy>();
         
         if (enemy != null) 
         {
-            enemy.TakeDamage(damage); // Le hacemos daño
-            Destroy(gameObject);      // Y destruimos el proyectil
+            enemy.TakeDamage(damage);
+            Destroy(gameObject);
         }
+    }
+
+    // ISpellBehavior implementation
+    public void Fire(UnityEngine.Vector3 direction, SpellData data)
+    {
+        Setup(direction, data.projectileSpeed, data.damage, data.projectileVisuals);
     }
 }

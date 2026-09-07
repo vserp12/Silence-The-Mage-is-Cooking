@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b0f14e4eda3c2e4884bbb50d870289, type: 3}
+  m_Name: Fire4
+  m_EditorClassIdentifier: Assembly-CSharp::SpellData
+  spellName: Fire Level 4
+  element: 1
+  level: 4
+  castTime: 1.5
+  damage: 80
+  projectileSpeed: 4
+  projectileVisuals: {fileID: 11400000, guid: 2e0a9c603913b945d980b5f3bead665a, type: 2}
+  projectilePrefab: {fileID: 4585251747438388385, guid: 0e324a2883b3a3017b566bb85aed466a, type: 3}
+  impactPrefab: {fileID: 0}
+  impactRadius: 2

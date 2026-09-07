@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21870576c453f204794e05dd40c36b3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 28b0f14e4eda3c2e4884bbb50d870289, type: 3}
   m_Name: ChispaArcana
   m_EditorClassIdentifier: Assembly-CSharp::SpellData
-  spellName: Chispa Arcana
-  castTime: 0.5
+  spellName: Nombre del Hechizo
+  castTime: 1
   damage: 10
-  projectileSpeed: 15
-  spellColor: {r: 1, g: 1, b: 0.23137255, a: 1}
-  projectilePrefab: {fileID: 7514419340198702025, guid: 405e3e8c39c8081478bdd250279c4572, type: 3}
+  projectileSpeed: 10
+  projectileVisuals: {fileID: 0}
+  projectilePrefab: {fileID: 7514419340198702025, guid: 7d855ac5a9d6ce69ba5318916a27a67a, type: 3}

@@ -1,39 +1,39 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameOverUI : MonoBehaviour
 {
-    public GameObject deathPanel; // El panel que creamos
-    public Button restartButton;  // Botón Reintentar
-    public Button menuButton;     // Botón Menú
+    public GameObject deathPanel;
+    public Button restartButton;
+    public Button menuButton;
+    public TextMeshProUGUI waveReachedText; // optional, set by scene setup
 
     void Start()
     {
-        // Asignamos las funciones a los botones
-        if (restartButton != null)
-            restartButton.onClick.AddListener(RestartGame);
-            
-        if (menuButton != null)
-            menuButton.onClick.AddListener(GoToMenu);
+        if (restartButton != null) restartButton.onClick.AddListener(RestartGame);
+        if (menuButton != null)    menuButton.onClick.AddListener(GoToMenu);
     }
 
-    // Esta función la llamamos cuando el jugador muere
     public void ShowGameOver()
     {
-        deathPanel.SetActive(true); // Mostramos el panel
-        Time.timeScale = 0f;        // Pausamos el juego (el tiempo se detiene)
+        deathPanel.SetActive(true);
+        Time.timeScale = 0f;
+
+        if (waveReachedText != null && WaveManager.Instance != null)
+            waveReachedText.text = $"You reached wave {WaveManager.Instance.CurrentWave}!";
     }
 
     void RestartGame()
     {
-        Time.timeScale = 1f; // ¡Muy importante! Reactivamos el tiempo antes de cargar
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Recarga la escena actual
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void GoToMenu()
     {
-        Time.timeScale = 1f; // Reactivamos el tiempo
-        SceneManager.LoadScene("MainMenu"); // Vuelve al menú
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }

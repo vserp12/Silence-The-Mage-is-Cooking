@@ -2389,6 +2389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62037d68f79aed2aa8ab2c1a4999cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LeaderboardUI
+  scoreSlots: []
 --- !u!114 &1863508815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2484,7 +2485,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3420279289382760947, guid: 1d5fd12fe67224f25949d431efead422, type: 3}
+  m_Sprite: {fileID: 4033355307889638888, guid: dbe3fc5fa79ef8fd1a9cd6da8c737eab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2768,7 +2769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0456a471874bab4159b27bdc82822617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMusic
-  music: {fileID: 8300000, guid: 17172da21e6e983139cfeb8a5b2f8795, type: 3}
+  music: {fileID: 8300000, guid: 2195890ee051a7cb6be3d73e6b59e0d7, type: 3}
 --- !u!4 &2118200999
 Transform:
   m_ObjectHideFlags: 0

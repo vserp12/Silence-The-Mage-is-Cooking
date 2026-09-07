@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e592e5be7bdd6ad69915c4623ebd260b, type: 3}
+  m_Name: SpellDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::SpellDatabase
+  waterSpells:
+  - {fileID: 11400000, guid: 0aedd6d7c9eb5d00daca1a67af2a67b0, type: 2}
+  - {fileID: 11400000, guid: 957e32209e208e750a2b8433ba4a8e58, type: 2}
+  - {fileID: 11400000, guid: 25db76a175a5747fca60a26e7743c746, type: 2}
+  - {fileID: 11400000, guid: d9039bc896f4b4d3bb58f6d20b734822, type: 2}
+  fireSpells:
+  - {fileID: 11400000, guid: 8b50d3bc3654a8ca0ba355f64c006bf9, type: 2}
+  - {fileID: 11400000, guid: 7c79a4599291b8aadadccc4ed47e7271, type: 2}
+  - {fileID: 11400000, guid: d6cf4fdf00c30b95d9ad47e4de4512cb, type: 2}
+  - {fileID: 11400000, guid: 309289695b75e7959815891fa3455296, type: 2}
+  electricitySpells:
+  - {fileID: 11400000, guid: 9054e69f8677f15338cdf68f76212037, type: 2}
+  - {fileID: 11400000, guid: c98c377f5e139addba3807491c087c6a, type: 2}
+  - {fileID: 11400000, guid: d24fa8e0751730a1e8e0f1aad7e380aa, type: 2}
+  - {fileID: 11400000, guid: 8fcbd4ff6bb9d9132b9935f954b4389d, type: 2}
+  lightSpell: {fileID: 11400000, guid: e5ab455869072a9ff8a522b7d789c344, type: 2}

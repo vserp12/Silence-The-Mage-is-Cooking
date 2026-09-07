@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b0f14e4eda3c2e4884bbb50d870289, type: 3}
+  m_Name: Water3
+  m_EditorClassIdentifier: Assembly-CSharp::SpellData
+  spellName: Water Level 3
+  element: 0
+  level: 3
+  castTime: 1.2
+  damage: 40
+  projectileSpeed: 10
+  projectileVisuals: {fileID: 11400000, guid: da6fc5bb64ceccd7e9306a9e69e8de03, type: 2}
+  projectilePrefab: {fileID: 4871146880198900512, guid: b5758c9c120059ca485437f7ecda5864, type: 3}
+  impactPrefab: {fileID: 2549549850456145607, guid: 07fe49a9c569497aab3a0e9eae020856, type: 3}
+  impactRadius: 0.7
