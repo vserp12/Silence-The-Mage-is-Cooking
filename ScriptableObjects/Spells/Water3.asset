@@ -21,4 +21,4 @@ MonoBehaviour:
   projectileVisuals: {fileID: 11400000, guid: da6fc5bb64ceccd7e9306a9e69e8de03, type: 2}
   projectilePrefab: {fileID: 4871146880198900512, guid: b5758c9c120059ca485437f7ecda5864, type: 3}
   impactPrefab: {fileID: 2549549850456145607, guid: 07fe49a9c569497aab3a0e9eae020856, type: 3}
-  impactRadius: 2.5
+  impactRadius: 0.7

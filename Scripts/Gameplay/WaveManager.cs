@@ -21,6 +21,9 @@ public class WaveManager : MonoBehaviour
     [Header("Intermission Timing")]
     public float intermissionDuration = 20f;
 
+    [Header("UI")]
+    public SpellSelectionUI spellSelectionUI;
+
     private int currentWave = 0;
     private int enemiesAlive = 0;
     private WaveState state = WaveState.Idle;
@@ -85,6 +88,15 @@ public class WaveManager : MonoBehaviour
             FindObjectOfType<SpellCaster>()?.SetSpellByElement(chosenElem, lvl);
             StartCoroutine(RunWave(1));
         });
+    }
+
+    // Called by SpellSelectionUI after the player picks a spell
+    public void OnSpellSelected()
+    {
+        if (state == WaveState.InitialSpellSelection)
+            StartCoroutine(RunWave(1));
+        else if (state == WaveState.Intermission)
+            StartCoroutine(RunWave(currentWave + 1));
     }
 
     // ── Spawning and Waves ──────────────────────────────────────────────────

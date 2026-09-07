@@ -1,25 +1,31 @@
 fileFormatVersion: 2
-guid: 1225832d336528a6f988e68fe3282312
+guid: 3df0a7b2b8817ad1445182c65a6096cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6519106895325619043
-    second: Elements_0
+      213: -1399043022508758291
+    second: Take_one_0
   - first:
-      213: -56389684126255199
-    second: Elements_1
+      213: 8177245195994727940
+    second: Take_one_1
   - first:
-      213: 7980543043835355830
-    second: Elements_2
+      213: -1855014888913186342
+    second: Take_one_2
   - first:
-      213: 6868460385936980070
-    second: Elements_3
+      213: 7483118915541357772
+    second: Take_one_3
   - first:
-      213: -4587099157823602956
-    second: Elements_4
+      213: 6627016384213883405
+    second: Take_one_4
   - first:
-      213: -1164242250183328453
-    second: Elements_5
+      213: -7098949488360026831
+    second: Take_one_5
+  - first:
+      213: -7397136041013412220
+    second: Take_one_6
+  - first:
+      213: -2503286530961952677
+    second: Take_one_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,35 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Elements_0
+      name: Take_one_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 1199
-        width: 306
-        height: 386
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d9c115381da7785a0800000000000000
-      internalID: -6519106895325619043
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Elements_1
-      rect:
-        serializedVersion: 2
-        x: 415
-        y: 1199
+        x: 127
+        y: 991
         width: 194
-        height: 386
+        height: 178
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +136,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a778ac81e9a73ff0800000000000000
-      internalID: -56389684126255199
+      spriteID: dea60e198c9959ce0800000000000000
+      internalID: -1399043022508758291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elements_2
+      name: Take_one_1
       rect:
         serializedVersion: 2
-        x: 751
-        y: 1263
-        width: 178
-        height: 290
+        x: 351
+        y: 1007
+        width: 146
+        height: 178
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,19 +158,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6b2658a9d9590ce60800000000000000
-      internalID: 7980543043835355830
+      spriteID: 406098c4e296b7170800000000000000
+      internalID: 8177245195994727940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elements_3
+      name: Take_one_2
       rect:
         serializedVersion: 2
-        x: 31
-        y: 799
-        width: 50
+        x: 527
+        y: 1007
+        width: 114
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad1d44d69c9a146e0800000000000000
+      internalID: -1855014888913186342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Take_one_3
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 991
+        width: 130
         height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -196,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 668bd91945ca15f50800000000000000
-      internalID: 6868460385936980070
+      spriteID: cc459d4a10169d760800000000000000
+      internalID: 7483118915541357772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elements_4
+      name: Take_one_4
       rect:
         serializedVersion: 2
-        x: 63
-        y: 767
-        width: 626
-        height: 306
+        x: 879
+        y: 1007
+        width: 146
+        height: 130
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4fe3e649e995750c0800000000000000
-      internalID: -4587099157823602956
+      spriteID: d0a13cd3a44e7fb50800000000000000
+      internalID: 6627016384213883405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elements_5
+      name: Take_one_5
       rect:
         serializedVersion: 2
-        x: 191
-        y: 751
-        width: 66
-        height: 114
+        x: 1055
+        y: 1007
+        width: 130
+        height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,8 +246,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b3d325587d7c7dfe0800000000000000
-      internalID: -1164242250183328453
+      spriteID: 13d0cdb5d077b7d90800000000000000
+      internalID: -7098949488360026831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Take_one_6
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 1007
+        width: 130
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48ef72066f7185990800000000000000
+      internalID: -7397136041013412220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Take_one_7
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 607
+        width: 1538
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b503efeb92a824dd0800000000000000
+      internalID: -2503286530961952677
       vertices: []
       indices: 
       edges: []
@@ -260,12 +310,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Elements_0: -6519106895325619043
-      Elements_1: -56389684126255199
-      Elements_2: 7980543043835355830
-      Elements_3: 6868460385936980070
-      Elements_4: -4587099157823602956
-      Elements_5: -1164242250183328453
+      Take_one_0: -1399043022508758291
+      Take_one_1: 8177245195994727940
+      Take_one_2: -1855014888913186342
+      Take_one_3: 7483118915541357772
+      Take_one_4: 6627016384213883405
+      Take_one_5: -7098949488360026831
+      Take_one_6: -7397136041013412220
+      Take_one_7: -2503286530961952677
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

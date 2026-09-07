@@ -420,3 +420,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterBob
   bobSpeed: 12
   stretchAmount: 0.12
+  hopHeight: 0.04

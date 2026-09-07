@@ -141,3 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8f646bf35e7903681a43ed64a39313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChainLightningProjectile
+  baseScale: 0.45

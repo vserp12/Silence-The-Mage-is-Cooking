@@ -307,6 +307,9 @@ MonoBehaviour:
   target: {fileID: 636357503}
   offset: {x: 0, y: 0, z: -10}
   smoothSpeed: 0.125
+  clampToBounds: 1
+  minBounds: {x: -10, y: -7.5}
+  maxBounds: {x: 10, y: 7.5}
 --- !u!114 &199216996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,7 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3a24885227c3e00a1471490ffc0d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 1
+  baseMoveSpeed: 5
 --- !u!61 &636357500
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -770,6 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce65fc1eee84fbc718b89e6d55fe1a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  baseMaxHealth: 100
   maxHealth: 50
   healthBarFill: {fileID: 1838509497}
 --- !u!114 &636357506
@@ -798,23 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterBob
   bobSpeed: 12
   stretchAmount: 0.12
---- !u!114 &636357509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636357498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da7763f204849a3a584cc07439221cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  hpLevel: 0
-  speedLevel: 0
-  damageLevel: 0
-  cooldownLevel: 0
-  availableUpgradePoints: 0
+  hopHeight: 0.04
 --- !u!95 &636357508
 Animator:
   serializedVersion: 7
@@ -837,6 +825,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &636357509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636357498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da7763f204849a3a584cc07439221cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  hpLevel: 0
+  speedLevel: 0
+  damageLevel: 0
+  cooldownLevel: 0
+  availableUpgradePoints: 0
 --- !u!1 &903895260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1070,106 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1500000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1500000002}
+  - component: {fileID: 1500000003}
+  m_Layer: 0
+  m_Name: WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1500000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1500000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc03cf60290fa76a9383be755be17fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  elfMeleePrefab: {fileID: 2222222222222001, guid: e7f8a9b0c1d2e3f4e7f8a9b0c1d2e3f4, type: 3}
+  elfMagicPrefab: {fileID: 3333333333333001, guid: d6e7f8a9b0c1d2e3d6e7f8a9b0c1d2e3, type: 3}
+  santaPrefab: {fileID: 1111111111111007, guid: f8a9b2c3d4e5f6a7f8a9b2c3d4e5f6a7, type: 3}
+  player: {fileID: 636357503}
+  spawnRadius: 8
+  spawnDelay: 0.35
+  intermissionDuration: 20
+  spellSelectionUI: {fileID: 0}
+--- !u!1 &1600000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1600000002}
+  - component: {fileID: 1600000003}
+  m_Layer: 0
+  m_Name: GameBootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1600000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1600000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a344a735cb7a8555d880c08f5dfe639c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameBootstrap
+  elfMeleePrefab: {fileID: 100100000, guid: e7f8a9b0c1d2e3f4e7f8a9b0c1d2e3f4, type: 3}
+  elfMagicPrefab: {fileID: 100100000, guid: d6e7f8a9b0c1d2e3d6e7f8a9b0c1d2e3, type: 3}
+  santaPrefab: {fileID: 100100000, guid: f8a9b2c3d4e5f6a7f8a9b2c3d4e5f6a7, type: 3}
+  spellDatabase: {fileID: 11400000, guid: d0c39ee8d3ecb5028a1026d4246ec522, type: 2}
 --- !u!1 &1838509496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,105 +1261,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &1500000001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1500000002}
-  - component: {fileID: 1500000003}
-  m_Layer: 0
-  m_Name: WaveManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1500000002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500000001}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1500000003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500000001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc03cf60290fa76a9383be755be17fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
-  elfMeleePrefab: {fileID: 100100000, guid: e7f8a9b0c1d2e3f4e7f8a9b0c1d2e3f4, type: 3}
-  elfMagicPrefab: {fileID: 100100000, guid: d6e7f8a9b0c1d2e3d6e7f8a9b0c1d2e3, type: 3}
-  santaPrefab: {fileID: 100100000, guid: f8a9b2c3d4e5f6a7f8a9b2c3d4e5f6a7, type: 3}
-  player: {fileID: 636357503}
-  spawnRadius: 8
-  spawnDelay: 0.35
-  intermissionDuration: 20
---- !u!1 &1600000001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1600000002}
-  - component: {fileID: 1600000003}
-  m_Layer: 0
-  m_Name: GameBootstrap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1600000002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600000001}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1600000003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600000001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a344a735cb7a8555d880c08f5dfe639c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameBootstrap
-  elfMeleePrefab: {fileID: 100100000, guid: e7f8a9b0c1d2e3f4e7f8a9b0c1d2e3f4, type: 3}
-  elfMagicPrefab: {fileID: 100100000, guid: d6e7f8a9b0c1d2e3d6e7f8a9b0c1d2e3, type: 3}
-  santaPrefab: {fileID: 100100000, guid: f8a9b2c3d4e5f6a7f8a9b2c3d4e5f6a7, type: 3}
-  spellDatabase: {fileID: 11400000, guid: d0c39ee8d3ecb5028a1026d4246ec522, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

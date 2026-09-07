@@ -141,3 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7ddee91b7cb3629bef5b69035670d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireAoEProjectile
+  baseScale: 0.5
